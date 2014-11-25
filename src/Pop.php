@@ -14,18 +14,28 @@
  * @namespace
  */
 namespace Pop;
-require_once __DIR__ . '/Project/Project.php';
 
 /**
- * This is the alias child class for the main Pop Project class.
- * Aside from ease of use, the purpose of this class is to satisfy
- * dependencies and requirements in certain sub-components.
+ * This is the main class for the Popcorn Micro-Framework.
  *
  * @category   Pop
  * @package    Pop
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2014 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    https://raw.github.com/nicksagona/Popcorn/master/LICENSE.TXT     New BSD License
- * @version    1.3.0
+ * @version    2.0.0a
  */
-class Pop extends \Pop\Project\Project {}
+class Pop
+{
+
+    /**
+     * Current version
+     */
+    const VERSION = '2.0.0a';
+
+    /**
+     * Current URL
+     */
+    const URL = 'http://popcorn.popphp.org/version';
+
+}

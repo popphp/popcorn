@@ -1,0 +1,32 @@
+{
+    "name": "popphp/popcorn2",
+    "description": "Popcorn, A REST-Based PHP Micro Framework",
+    "keywords": [
+        "rest framework",
+        "php micro framework",
+        "popcorn",
+        "popcorn 2"
+    ],
+    "homepage": "http://popcorn.popphp.org/",
+    "license": "New BSD",
+    "authors": [
+        {
+            "name": "Nick Sagona",
+            "email": "dev@nolainteractive.com",
+            "homepage": "http://www.nolainteractive.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "popphp/popphp2": "~2.0"
+    },
+    "suggest": {
+        "popphp/pop-data": "For converting data between different types, SQL, CSV, XML, etc",
+        "popphp/pop-db": "For DB management and transactions",
+        "popphp/pop-file": "For file uploads and directory traversing",
+        "popphp/pop-form": "For HTML form generation and validation",
+        "popphp/pop-image": "For image processing and manipulation",
+        "popphp/pop-mail": "For managing and sending mail via PHP",
+        "popphp/pop-web": "For web extra, like sessions, cookies and mobile redirects"
+    }
+}
