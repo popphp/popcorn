@@ -28,5 +28,11 @@
         "popphp/pop-image": "For image processing and manipulation",
         "popphp/pop-mail": "For managing and sending mail via PHP",
         "popphp/pop-web": "For web extra, like sessions, cookies and mobile redirects"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pop\\": "src/"
+        }
     }
+
 }
