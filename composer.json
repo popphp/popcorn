@@ -1,11 +1,10 @@
 {
-    "name": "popphp/popcorn2",
+    "name": "popphp/popcorn",
     "description": "Popcorn, A REST-Based PHP Micro Framework",
     "keywords": [
         "rest framework",
         "php micro framework",
-        "popcorn",
-        "popcorn 2"
+        "popcorn"
     ],
     "homepage": "http://popcorn.popphp.org/",
     "license": "New BSD",
@@ -18,7 +17,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "popphp/popphp2": "~2.0"
+        "popphp/popphp2": "2.*@dev"
     },
     "suggest": {
         "popphp/pop-data": "For converting data between different types, SQL, CSV, XML, etc",
@@ -31,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Pop\\": "src/"
+            "Popcorn\\": "src/"
         }
     }
 
