@@ -7,7 +7,7 @@
  * @package    Pop
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2014 NOLA Interactive, LLC. (http://www.nolainteractive.com)
- * @license    https://raw.github.com/nicksagona/Popcorn/master/LICENSE.TXT     New BSD License
+ * @license    http://popcorn.popphp.org/license     New BSD License
  */
 
 /**
@@ -22,7 +22,7 @@ namespace Pop;
  * @package    Pop
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2014 NOLA Interactive, LLC. (http://www.nolainteractive.com)
- * @license    https://raw.github.com/nicksagona/Popcorn/master/LICENSE.TXT     New BSD License
+ * @license    http://popcorn.popphp.org/license     New BSD License
  * @version    2.0.0a
  */
 class Exception extends \Exception {}
