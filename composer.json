@@ -17,7 +17,10 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "popphp/popphp2": "2.*@dev"
+        "popphp/popphp": "2.*@dev",
+        "popphp/pop-http": "2.*@dev",
+        "popphp/pop-view": "2.*@dev",
+        "popphp/pop-web":  "2.*@dev"
     },
     "suggest": {
         "popphp/pop-data": "For converting data between different types, SQL, CSV, XML, etc",
@@ -25,8 +28,7 @@
         "popphp/pop-file": "For file uploads and directory traversing",
         "popphp/pop-form": "For HTML form generation and validation",
         "popphp/pop-image": "For image processing and manipulation",
-        "popphp/pop-mail": "For managing and sending mail via PHP",
-        "popphp/pop-web": "For web extra, like sessions, cookies and mobile redirects"
+        "popphp/pop-mail": "For managing and sending mail via PHP"
     },
     "autoload": {
         "psr-4": {
