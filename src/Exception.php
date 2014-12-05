@@ -13,7 +13,7 @@
 /**
  * @namespace
  */
-namespace Pop;
+namespace Popcorn;
 
 /**
  * This is the Pop Exception class for Popcorn.
