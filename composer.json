@@ -34,6 +34,10 @@
         "psr-4": {
             "Popcorn\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
     }
-
 }
