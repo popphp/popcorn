@@ -174,8 +174,7 @@ class Pop extends Application
             throw new Exception('Error: That method is not allowed.');
         }
 
-        $this->routes[$method][] = $route;
-        $this->router->addRoute($route, $controller);
+        $this->routes[$method][$route] = $controller;
 
         return $this;
     }
@@ -230,6 +229,7 @@ class Pop extends Application
     public function run()
     {
         // If route is allowed for this method
+        $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
         if ($this->router->hasRoute() && $this->isAllowed($this->router->getRouteMatch()->getRoute())) {
             parent::run();
         }
@@ -286,7 +286,7 @@ class Pop extends Application
         $allowed = false;
         $method  = strtolower($_SERVER['REQUEST_METHOD']);
 
-        foreach ($this->routes[$method] as $r) {
+        foreach ($this->routes[$method] as $r => $c) {
             if (substr($r, 0, strlen($route)) == $route) {
                 $allowed = true;
             }
