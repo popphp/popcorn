@@ -232,6 +232,12 @@ class Pop extends Application
         $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
         if ($this->router->hasRoute() && $this->isAllowed($this->router->getRouteMatch()->getRoute())) {
             parent::run();
+        } else {
+            $this->trigger('app.error', [
+                'exception' => new Exception(
+                    'Error: That route was not ' . (($this->router->hasRoute()) ? 'allowed' : 'found') . '.'
+                )
+            ]);
         }
     }
 
