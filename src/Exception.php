@@ -2,7 +2,7 @@
 /**
  * Popcorn Micro-Framework (http://popcorn.popphp.org/)
  *
- * @link       https://github.com/nicksagona/Popcorn
+ * @link       https://github.com/popphp/popcorn
  * @category   Pop
  * @package    Pop
  * @author     Nick Sagona, III <dev@nolainteractive.com>
