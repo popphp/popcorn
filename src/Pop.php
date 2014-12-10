@@ -182,14 +182,22 @@ class Pop extends Application
     /**
      * Add multiple routes
      *
-     * @param  string $methods
-     * @param  string $route
-     * @param  array  $controller
+     * @param  array|string $methods
+     * @param  string       $route
+     * @param  array        $controller
+     * @throws Exception
      * @return Pop
      */
     public function addRoutes($methods, $route, array $controller)
     {
-        $methods = explode(',', str_replace(', ', ',', strtolower($methods)));
+        if (is_string($methods)) {
+            $methods = explode(',', str_replace(', ', ',', strtolower($methods)));
+        }
+
+        if (!is_array($methods)) {
+            throw new Exception('Error: The $methods parameter must be either an array or a comma-delimited string.');
+        }
+
         foreach ($methods as $method) {
             $this->addRoute($method, $route, $controller);
         }
@@ -240,7 +248,6 @@ class Pop extends Application
             ]);
         }
     }
-
 
     /**
      * Compares the local version to the latest version available
