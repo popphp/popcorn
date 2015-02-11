@@ -6,7 +6,7 @@
  * @category   Popcorn
  * @package    Popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2014 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @copyright  Copyright (c) 2009-2015 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
  */
 
@@ -23,7 +23,7 @@ use Pop\Application;
  * @category   Popcorn
  * @package    Popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2014 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @copyright  Copyright (c) 2009-2015 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
  * @version    2.0.0a
  */
