@@ -1,6 +1,8 @@
 Welcome to Popcorn PHP Micro Framework
 ======================================
 
+[![Build Status](https://travis-ci.org/popphp/popcorn.svg?branch=master)](https://travis-ci.org/popphp/popcorn)
+
 RELEASE INFORMATION
 -------------------
 Popcorn PHP REST-Based Micro Framework 2.0.0 Alpha  
