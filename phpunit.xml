@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Popcorn REST Micro-Framework PHPUnit Test">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="/tmp/popcorn-cc" charset="UTF-8"
+             yui="true" highlight="false" showUncoveredFiles="true"
+             lowUpperBound="35" highLowerBound="70" />
+    </logging>
+</phpunit>

@@ -22,6 +22,9 @@
         "popphp/pop-view": "2.*@dev",
         "popphp/pop-web":  "2.*@dev"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.6.*"
+    },
     "suggest": {
         "popphp/pop-data": "For converting data between different types, SQL, CSV, XML, etc",
         "popphp/pop-db": "For DB management and transactions",
@@ -33,6 +36,11 @@
     "autoload": {
         "psr-4": {
             "Popcorn\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Popcorn\\Test\\": "tests/"
         }
     },
     "extra": {

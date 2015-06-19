@@ -205,28 +205,62 @@ class Pop extends Application
     }
 
     /**
-     * Method to get a route
+     * Method to get all routes
      *
      * @param  string $method
      * @throws Exception
      * @return array
      */
-    public function getRoute($method)
+    public function getRoutes($method = null)
     {
-        if (!array_key_exists(strtolower($method), $this->routes)) {
+        if ((null !== $method) && !array_key_exists(strtolower($method), $this->routes)) {
             throw new Exception('Error: That method is not allowed.');
         }
-        return $this->routes[$method];
+        return (null !== $method) ? $this->routes[$method] : $this->routes;
     }
 
     /**
-     * Method to get all routes
+     * Method to get a route by method
      *
-     * @return array
+     * @param  string $method
+     * @param  string $route
+     * @return mixed
      */
-    public function getRoutes()
+    public function getRoute($method, $route)
     {
-        return $this->routes;
+        return ($this->hasRoute($method, $route)) ? $this->routes[$method][$route] : null;
+    }
+
+    /**
+     * Method to determine if the application has a route
+     *
+     * @param  string $method
+     * @param  string $route
+     * @return boolean
+     */
+    public function hasRoute($method, $route)
+    {
+        return (isset($this->routes[$method]) && isset($this->routes[$method][$route]));
+    }
+
+    /**
+     * Determine if the route is allowed on for the method
+     *
+     * @param  string $route
+     * @return boolean
+     */
+    public function isAllowed($route)
+    {
+        $allowed = false;
+        $method  = strtolower($_SERVER['REQUEST_METHOD']);
+
+        foreach ($this->routes[$method] as $r => $c) {
+            if (substr($r, 0, strlen($route)) == $route) {
+                $allowed = true;
+            }
+        }
+
+        return $allowed;
     }
 
     /**
@@ -257,7 +291,7 @@ class Pop extends Application
      */
     public static function compareVersion($version)
     {
-        return version_compare($version, self::VERSION);
+        return version_compare(self::VERSION, $version);
     }
 
     /**
@@ -285,27 +319,7 @@ class Pop extends Application
      */
     public static function isLatest()
     {
-        return (self::compareVersion(self::getLatest()) < 1);
-    }
-
-    /**
-     * Determine if the route is allowed on for the method
-     *
-     * @param  string $route
-     * @return boolean
-     */
-    protected function isAllowed($route)
-    {
-        $allowed = false;
-        $method  = strtolower($_SERVER['REQUEST_METHOD']);
-
-        foreach ($this->routes[$method] as $r => $c) {
-            if (substr($r, 0, strlen($route)) == $route) {
-                $allowed = true;
-            }
-        }
-
-        return $allowed;
+        return (self::compareVersion(self::getLatest()) >= 1);
     }
 
 }
