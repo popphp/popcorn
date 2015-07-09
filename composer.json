@@ -17,10 +17,10 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "popphp/popphp": "2.*@dev",
-        "popphp/pop-http": "2.*@dev",
-        "popphp/pop-view": "2.*@dev",
-        "popphp/pop-web":  "2.*@dev"
+        "popphp/popphp": "2.0.*",
+        "popphp/pop-http": "2.0.*",
+        "popphp/pop-view": "2.0.*",
+        "popphp/pop-web":  "2.0.*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.6.*"
