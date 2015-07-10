@@ -319,7 +319,7 @@ class Pop extends Application
      */
     public static function isLatest()
     {
-        return (self::compareVersion(self::getLatest()) >= 1);
+        return (self::compareVersion(self::getLatest()) >= 0);
     }
 
 }
