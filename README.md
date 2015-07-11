@@ -20,7 +20,7 @@ Because of these changes, and the changes to the Pop PHP Framework on which it i
 built, it actually makes Popcorn much more streamlined. Before, Popcorn was really
 it's own self-contained thing, borrowing and including components from the previous
 version of the Pop PHP Framework. Now, Popcorn is simply built on top of the new
-version of the core component of [Pop PHP](https://github.com/popphp/popphp) and
+version of the core components of [Pop PHP](https://github.com/popphp/popphp) and
 acts as a layer to enforce the REST-based routing rules of a web application.
 
 INSTALL
