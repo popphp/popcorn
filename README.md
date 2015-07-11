@@ -13,8 +13,8 @@ OVERVIEW
 Popcorn PHP Micro Framework is a REST-based micro framework. The biggest changes
 in version 2.0.0 is that it supports 5.4+ only and has been stripped down to the
 least amount of internal dependencies as possible. Going beyond that, Popcorn 2.0.0
-supports PSR-4 autoloading and it now integrated with Composer, much like the version
-of [Pop PHP Framework](http://www.popphp.org/) 2.0.0.
+supports PSR-4 autoloading and it now integrated with Composer, much like the new
+version of [Pop PHP Framework](http://www.popphp.org/) 2.0.0.
 
 Because of these changes, and the changes to the Pop PHP Framework on which it is
 built, it actually makes Popcorn much more streamlined. Before, Popcorn was really
@@ -43,7 +43,7 @@ use Popcorn\Pop;
 
 $app = new Pop();
 
-// Home page http://localhost:8000/
+// Home page: http://localhost:8000/
 $app->get('/', [
     'controller' => function() {
         header('HTTP/1.1 200 OK');
@@ -85,8 +85,8 @@ $app->run();
 In the above POST example, if you attempted access that URL via GET
 (or any method that wasn't POST), it would fail. If you access that URL
 via POST, but with the wrong application token, it will return the
-'Login Failed' message. Access the URL with the correct application
-toke, and it will be successful:
+'Login Failed' message as enforced by the application. Access the URL
+via POST with the correct application token, and it will be successful:
 
     curl -X POST -dtoken=badtoken http://localhost:8000/login
     Login Failed.
@@ -98,8 +98,9 @@ ADVANCED USAGE
 --------------
 
 In a more advanced example, we can take advantage of more of an MVC-style
-of wiring up an application using Popcorn. Keeping it simple, let's look
-at a controller class like this:
+of wiring up an application using the core components of Pop PHP with
+Popcorn. Keeping it simple, let's look at a controller class
+`MyApp\Controller\IndexController` like this:
 
 ```php
 <?php
@@ -145,10 +146,11 @@ class IndexController extends AbstractController
 }
 ```
 
-and two view scripts, 'index.phtml' and 'error.phtml', respectively:
+and two view scripts, `index.phtml` and `error.phtml`, respectively:
 
 ```php
 <!DOCTYPE html>
+<!-- index.phtml //-->
 <html>
 
 <head>
@@ -165,6 +167,7 @@ and two view scripts, 'index.phtml' and 'error.phtml', respectively:
 
 ```php
 <!DOCTYPE html>
+<!-- error.phtml //-->
 <html>
 
 <head>
@@ -186,9 +189,6 @@ use Popcorn\Pop;
 
 $app = new Pop();
 
-// The 'default' parameter sets this controller as the default controller
-// to handle routes that aren't found. Typically, there is a default action
-// such as an 'error' method to handle this.
 $app->get('/', [
     'controller' => 'MyApp\Controller\IndexController',
     'action'     => 'index',
@@ -198,5 +198,6 @@ $app->get('/', [
 
 $app->run();
 ```
-
-
+The 'default' parameter sets the controller as the default controller
+to handle routes that aren't found. Typically, there is a default action
+such as an 'error' method to handle this.
