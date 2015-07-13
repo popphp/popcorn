@@ -1,6 +1,8 @@
 Popcorn PHP Micro Framework
 ===========================
 
+<img src="http://popcorn.popphp.org/img/popcorn-logo.png" width="180" height="180" />
+
 [![Build Status](https://travis-ci.org/popphp/popcorn.svg?branch=master)](https://travis-ci.org/popphp/popcorn)
 
 RELEASE INFORMATION
