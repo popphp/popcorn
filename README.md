@@ -6,7 +6,7 @@ Popcorn PHP Micro Framework
 RELEASE INFORMATION
 -------------------
 Popcorn PHP REST-Based Micro Framework 2.0.0  
-Release July 11, 2015
+Released July 11, 2015
 
 OVERVIEW
 --------
