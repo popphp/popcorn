@@ -2,6 +2,7 @@ Popcorn PHP Micro Framework
 ===========================
 
 [![Build Status](https://travis-ci.org/popphp/popcorn.svg?branch=master)](https://travis-ci.org/popphp/popcorn)
+[![Coverage Status](http://www.popphp.org/cc/coverage.php?comp=popcorn)](http://www.popphp.org/cc/popcorn/)
 
 RELEASE INFORMATION
 -------------------
