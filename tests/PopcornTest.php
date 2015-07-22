@@ -20,7 +20,12 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
             'controller' => function(){
                 echo 'home';
             }]);
+
+        $app->get('/hello', function(){
+                echo 'hello';
+            });
         $this->assertTrue($app->hasRoute('get', '/home'));
+        $this->assertTrue($app->hasRoute('get', '/hello'));
     }
 
     public function testAddHeadRoute()

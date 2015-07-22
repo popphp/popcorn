@@ -45,40 +45,29 @@ use Popcorn\Pop;
 $app = new Pop();
 
 // Home page: http://localhost:8000/
-$app->get('/', [
-    'controller' => function() {
-        header('HTTP/1.1 200 OK');
-        echo 'Hello World!';
-    }
-]);
+$app->get('/', function() {
+    echo 'Hello World!';
+});
 
 // Say hello page: http://localhost:8000/hello/nick
-$app->get('/hello/:name', [
-    'controller' => function($name) {
-        header('HTTP/1.1 200 OK');
-        echo 'Hello ' . ucfirst($name) . '!';
-    }
-]);
+$app->get('/hello/:name', function($name) {
+    echo 'Hello ' . ucfirst($name) . '!';
+});
 
 // Wildcard route to handle errors
-$app->get('*', [
-    'controller' => function() {
-        header('HTTP/1.1 404 Not Found');
-        echo 'Page Not Found.';
-    }
-]);
+$app->get('*', function() {
+    header('HTTP/1.1 404 Not Found');
+    echo 'Page Not Found.';
+});
 
 // Post route to process a login
-$app->post('/login', [
-    'controller' => function() {
-        header('HTTP/1.1 200 OK');
-        if ($_POST['token'] == 'mytoken') {
-            echo 'Login Successful.';
-        } else {
-            echo 'Login Failed.';
-        }
+$app->post('/login', function() {
+    if ($_POST['token'] == 'mytoken') {
+        echo 'Login Successful.';
+    } else {
+        echo 'Login Failed.';
     }
-]);
+});
 
 $app->run();
 ```

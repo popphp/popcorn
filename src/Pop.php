@@ -53,10 +53,10 @@ class Pop extends Application
      * Add a GET route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function get($route, array $controller)
+    public function get($route, $controller)
     {
         return $this->addRoute('get', $route, $controller);
     }
@@ -65,10 +65,10 @@ class Pop extends Application
      * Add a HEAD route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function head($route, array $controller)
+    public function head($route, $controller)
     {
         return $this->addRoute('head', $route, $controller);
     }
@@ -77,10 +77,10 @@ class Pop extends Application
      * Add a POST route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function post($route, array $controller)
+    public function post($route, $controller)
     {
         return $this->addRoute('post', $route, $controller);
     }
@@ -89,10 +89,10 @@ class Pop extends Application
      * Add a PUT route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function put($route, array $controller)
+    public function put($route, $controller)
     {
         return $this->addRoute('put', $route, $controller);
     }
@@ -101,10 +101,10 @@ class Pop extends Application
      * Add a DELETE route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function delete($route, array $controller)
+    public function delete($route, $controller)
     {
         return $this->addRoute('delete', $route, $controller);
     }
@@ -113,10 +113,10 @@ class Pop extends Application
      * Add a TRACE route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function trace($route, array $controller)
+    public function trace($route, $controller)
     {
         return $this->addRoute('trace', $route, $controller);
     }
@@ -125,10 +125,10 @@ class Pop extends Application
      * Add an OPTIONS route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function options($route, array $controller)
+    public function options($route, $controller)
     {
         return $this->addRoute('options', $route, $controller);
     }
@@ -137,10 +137,10 @@ class Pop extends Application
      * Add a CONNECT route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function connect($route, array $controller)
+    public function connect($route, $controller)
     {
         return $this->addRoute('connect', $route,  $controller);
     }
@@ -149,10 +149,10 @@ class Pop extends Application
      * Add a PATCH route
      *
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @return Pop
      */
-    public function patch($route, array $controller)
+    public function patch($route, $controller)
     {
         return $this->addRoute('patch', $route, $controller);
     }
@@ -162,14 +162,18 @@ class Pop extends Application
      *
      * @param  string $method
      * @param  string $route
-     * @param  array  $controller
+     * @param  mixed  $controller
      * @throws Exception
      * @return Pop
      */
-    public function addRoute($method, $route, array $controller)
+    public function addRoute($method, $route, $controller)
     {
         if (!array_key_exists(strtolower($method), $this->routes)) {
             throw new Exception('Error: That method is not allowed.');
+        }
+
+        if (is_callable($controller)) {
+            $controller = ['controller' => $controller];
         }
 
         $this->routes[$method][$route] = $controller;
@@ -182,11 +186,11 @@ class Pop extends Application
      *
      * @param  array|string $methods
      * @param  string       $route
-     * @param  array        $controller
+     * @param  mixed        $controller
      * @throws Exception
      * @return Pop
      */
-    public function addRoutes($methods, $route, array $controller)
+    public function addRoutes($methods, $route, $controller)
     {
         if (is_string($methods)) {
             $methods = explode(',', str_replace(', ', ',', strtolower($methods)));
