@@ -62,12 +62,12 @@ $app->get('*', function() {
     echo 'Page Not Found.';
 });
 
-// Post route to process a login
-$app->post('/login', function() {
-    if ($_POST['token'] == 'mytoken') {
-        echo 'Login Successful.';
+// Post route to process an auth request
+$app->post('/auth', function() {
+    if ($_SERVER['HTTP_AUTHORIZATION'] == 'my-token') {
+        echo 'Auth successful';
     } else {
-        echo 'Login Failed.';
+        echo 'Auth failed';
     }
 });
 
@@ -77,14 +77,14 @@ $app->run();
 In the above POST example, if you attempted access that URL via GET
 (or any method that wasn't POST), it would fail. If you access that URL
 via POST, but with the wrong application token, it will return the
-'Login Failed' message as enforced by the application. Access the URL
+'Auth failed' message as enforced by the application. Access the URL
 via POST with the correct application token, and it will be successful:
 
-    curl -X POST -dtoken=badtoken http://localhost:8000/login
-    Login Failed.
+    curl -X POST --header "Authorization: bad-token" http://localhost:8000/auth
+    Auth failed
 
-    curl -X POST -dtoken=mytoken http://localhost:8000/login
-    Login Successful.
+    curl -X POST --header "Authorization: my-token" http://localhost:8000/auth
+    Auth successful
 
 ADVANCED USAGE
 --------------
