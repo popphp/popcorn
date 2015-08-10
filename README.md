@@ -33,6 +33,12 @@ Install `popcorn` using Composer.
 
     composer require popphp/popcorn
 
+
+DISCUSSION
+----------
+
+There is an IRC channel for Pop PHP over at irc://freenode/popphp.
+
 BASIC USAGE
 -----------
 
