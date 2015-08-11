@@ -192,6 +192,9 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($app->isAllowed('/home'));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testRun()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -201,7 +204,11 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
             'controller' => function(){
                 echo 'home';
             }]);
-        $app->run();
+
+        ob_start();
+        $app->run(false);
+        $result = ob_get_clean();
+        $this->assertFalse(ctype_print($result));
     }
 
 }

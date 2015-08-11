@@ -268,9 +268,10 @@ class Pop extends Application
     /**
      * Run the application.
      *
+     * @param  boolean $exit
      * @return void
      */
-    public function run()
+    public function run($exit = true)
     {
         // If route is allowed for this method
         $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
@@ -284,7 +285,7 @@ class Pop extends Application
                     'Error: That route was not ' . (($this->router->hasRoute()) ? 'allowed' : 'found') . '.'
                 )
             ]);
-            $this->router->getRouteMatch()->noRouteFound();
+            $this->router->getRouteMatch()->noRouteFound((bool)$exit);
         }
     }
 
