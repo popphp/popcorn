@@ -23,7 +23,7 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2015 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    2.0.0
+ * @version    2.0.1
  */
 class Pop extends Application
 {
@@ -31,7 +31,7 @@ class Pop extends Application
     /**
      * Current version
      */
-    const VERSION = '2.0.0';
+    const VERSION = '2.0.1';
 
     /**
      * Routes array
@@ -58,7 +58,7 @@ class Pop extends Application
      */
     public function get($route, $controller)
     {
-        return $this->addRoute('get', $route, $controller);
+        return $this->setRoute('get', $route, $controller);
     }
 
     /**
@@ -70,7 +70,7 @@ class Pop extends Application
      */
     public function head($route, $controller)
     {
-        return $this->addRoute('head', $route, $controller);
+        return $this->setRoute('head', $route, $controller);
     }
 
     /**
@@ -82,7 +82,7 @@ class Pop extends Application
      */
     public function post($route, $controller)
     {
-        return $this->addRoute('post', $route, $controller);
+        return $this->setRoute('post', $route, $controller);
     }
 
     /**
@@ -94,7 +94,7 @@ class Pop extends Application
      */
     public function put($route, $controller)
     {
-        return $this->addRoute('put', $route, $controller);
+        return $this->setRoute('put', $route, $controller);
     }
 
     /**
@@ -106,7 +106,7 @@ class Pop extends Application
      */
     public function delete($route, $controller)
     {
-        return $this->addRoute('delete', $route, $controller);
+        return $this->setRoute('delete', $route, $controller);
     }
 
     /**
@@ -118,7 +118,7 @@ class Pop extends Application
      */
     public function trace($route, $controller)
     {
-        return $this->addRoute('trace', $route, $controller);
+        return $this->setRoute('trace', $route, $controller);
     }
 
     /**
@@ -130,7 +130,7 @@ class Pop extends Application
      */
     public function options($route, $controller)
     {
-        return $this->addRoute('options', $route, $controller);
+        return $this->setRoute('options', $route, $controller);
     }
 
     /**
@@ -142,7 +142,7 @@ class Pop extends Application
      */
     public function connect($route, $controller)
     {
-        return $this->addRoute('connect', $route,  $controller);
+        return $this->setRoute('connect', $route,  $controller);
     }
 
     /**
@@ -154,7 +154,7 @@ class Pop extends Application
      */
     public function patch($route, $controller)
     {
-        return $this->addRoute('patch', $route, $controller);
+        return $this->setRoute('patch', $route, $controller);
     }
 
     /**
@@ -166,7 +166,7 @@ class Pop extends Application
      * @throws Exception
      * @return Pop
      */
-    public function addRoute($method, $route, $controller)
+    public function setRoute($method, $route, $controller)
     {
         if (!array_key_exists(strtolower($method), $this->routes)) {
             throw new Exception('Error: That method is not allowed.');
@@ -190,7 +190,7 @@ class Pop extends Application
      * @throws Exception
      * @return Pop
      */
-    public function addRoutes($methods, $route, $controller)
+    public function setRoutes($methods, $route, $controller)
     {
         if (is_string($methods)) {
             $methods = explode(',', str_replace(', ', ',', strtolower($methods)));
@@ -201,7 +201,7 @@ class Pop extends Application
         }
 
         foreach ($methods as $method) {
-            $this->addRoute($method, $route, $controller);
+            $this->setRoute($method, $route, $controller);
         }
         return $this;
     }

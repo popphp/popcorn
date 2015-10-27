@@ -112,7 +112,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Popcorn\Exception');
         $app = new Pop();
-        $app->addRoute('bad', '/home', [
+        $app->setRoute('bad', '/home', [
             'controller' => function(){
                 echo 'home';
             }]);
@@ -121,7 +121,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
     public function testAddRoutes()
     {
         $app = new Pop();
-        $app->addRoutes('get,post', '/home', ['controller' => function(){
+        $app->setRoutes('get,post', '/home', ['controller' => function(){
             echo 'home';
         }]);
         $this->assertTrue($app->hasRoute('get', '/home'));
@@ -132,7 +132,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Popcorn\Exception');
         $app = new Pop();
-        $app->addRoutes(new \StdClass, '/home', ['controller' => function(){
+        $app->setRoutes(new \StdClass, '/home', ['controller' => function(){
             echo 'home';
         }]);
     }
@@ -140,7 +140,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
     public function testGetRoute()
     {
         $app = new Pop();
-        $app->addRoutes('get,post', '/home', ['controller' => function () {
+        $app->setRoutes('get,post', '/home', ['controller' => function () {
             echo 'home';
         }]);
         $this->assertTrue(isset($app->getRoute('get', '/home')['controller']));
@@ -149,7 +149,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
     public function testGetRoutes()
     {
         $app = new Pop();
-        $app->addRoutes('get,post', '/home', ['controller' => function () {
+        $app->setRoutes('get,post', '/home', ['controller' => function () {
             echo 'home';
         }]);
         $get = $app->getRoutes('get');
@@ -160,7 +160,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Popcorn\Exception');
         $app = new Pop();
-        $app->addRoutes('get,post', '/home', ['controller' => function () {
+        $app->setRoutes('get,post', '/home', ['controller' => function () {
             echo 'home';
         }]);
         $get = $app->getRoutes('bad');
@@ -173,7 +173,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLatest()
     {
-        $this->assertEquals('2.0.0', Pop::getLatest());
+        $this->assertEquals('2.0.1', Pop::getLatest());
     }
 
     public function testIsLatest()
