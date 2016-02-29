@@ -23,7 +23,7 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    2.0.1
+ * @version    2.0.2
  */
 class Pop extends Application
 {
@@ -31,7 +31,7 @@ class Pop extends Application
     /**
      * Current version
      */
-    const VERSION = '2.0.1';
+    const VERSION = '2.0.2';
 
     /**
      * Routes array
@@ -48,6 +48,60 @@ class Pop extends Application
         'connect' => [],
         'patch'   => []
     ];
+
+    /**
+     * Constructor
+     *
+     * Instantiate an application object
+     *
+     * Optional parameters are a service locator instance, a router instance,
+     * an event manager instance or a configuration object or array
+     *
+     * @return Pop
+     */
+    public function __construct()
+    {
+        $args = func_get_args();
+
+        foreach ($args as $i => $arg) {
+            if (is_array($arg) && isset($arg['routes'])) {
+                $routeKeys = array_keys($this->routes);
+                foreach ($routeKeys as $key) {
+                    if (isset($arg['routes'][$key])) {
+                        foreach ($arg['routes'][$key] as $route => $controller) {
+                            $this->setRoute($key, $route, $controller);
+                        }
+                        unset($arg['routes'][$key]);
+                    }
+                }
+
+                if (count($arg['routes']) == 0) {
+                    unset($args[$i]['routes']);
+                }
+            }
+        }
+
+        switch (count($args)) {
+            case 1:
+                parent::__construct($args[0]);
+                break;
+            case 2:
+                parent::__construct($args[0], $args[1]);
+                break;
+            case 3:
+                parent::__construct($args[0], $args[1], $args[2]);
+                break;
+            case 4:
+                parent::__construct($args[0], $args[1], $args[2], $args[3]);
+                break;
+            case 5:
+                parent::__construct($args[0], $args[1], $args[2], $args[3], $args[4]);
+                break;
+            default:
+                parent::__construct();
+        }
+
+    }
 
     /**
      * Add a GET route

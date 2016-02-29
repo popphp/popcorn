@@ -13,6 +13,34 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Popcorn\Pop', $app);
     }
 
+    public function testConstructorRoutes()
+    {
+        $app = new Pop([
+            'routes' => [
+                'get' => [
+                    '/' => function() {
+                        header('HTTP/1.1 200 OK');
+                        echo 'Hello World!';
+                    }
+                ],
+                'post' => [
+                    '/edit/:id' => function($id){
+                        header('HTTP/1.1 200 OK');
+                        echo 'Edit ' . $id . PHP_EOL;
+                    }
+                ]
+            ],
+            'foo' => 'bar',
+            'baz' => [
+                1, 2, 3
+            ]
+        ]);
+        $this->assertInstanceOf('Popcorn\Pop', $app);
+        $this->assertTrue(isset($app->getRoute('get', '/')['controller']));
+        $this->assertTrue(isset($app->getRoute('post', '/edit/:id')['controller']));
+        $this->assertEquals('bar', $app->config()['foo']);
+    }
+
     public function testAddGetRoute()
     {
         $app = new Pop();
@@ -173,7 +201,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLatest()
     {
-        $this->assertEquals('2.0.1', Pop::getLatest());
+        $this->assertEquals('2.0.2', Pop::getLatest());
     }
 
     public function testIsLatest()
