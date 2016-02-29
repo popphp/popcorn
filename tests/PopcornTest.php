@@ -2,6 +2,10 @@
 
 namespace PopcornTest;
 
+use Composer\Autoload\ClassLoader;
+use Pop\Event\Manager;
+use Pop\Router\Router;
+use Pop\Service\Locator;
 use Popcorn\Pop;
 
 class PopcornTest extends \PHPUnit_Framework_TestCase
@@ -15,7 +19,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorRoutes()
     {
-        $app = new Pop([
+        $config = [
             'routes' => [
                 'get' => [
                     '/' => function() {
@@ -28,13 +32,27 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
                         header('HTTP/1.1 200 OK');
                         echo 'Edit ' . $id . PHP_EOL;
                     }
+                ],
+                'get,post' => [
+                    '/' => function() {
+                        header('HTTP/1.1 200 OK');
+                        echo 'Hello Get and Post!';
+                    }
                 ]
             ],
             'foo' => 'bar',
             'baz' => [
                 1, 2, 3
             ]
-        ]);
+        ];
+
+        $app = new Pop($config);
+        $app2 = new Pop($config, new Router());
+        $app3 = new Pop($config, new Router(), new Locator());
+        $app4 = new Pop($config, new Router(), new Locator(), new Manager());
+        $app4 = new Pop($config, new Router(), new Locator(), new Manager(), new ClassLoader());
+
+
         $this->assertInstanceOf('Popcorn\Pop', $app);
         $this->assertTrue(isset($app->getRoute('get', '/')['controller']));
         $this->assertTrue(isset($app->getRoute('post', '/edit/:id')['controller']));

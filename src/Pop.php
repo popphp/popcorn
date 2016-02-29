@@ -65,6 +65,17 @@ class Pop extends Application
 
         foreach ($args as $i => $arg) {
             if (is_array($arg) && isset($arg['routes'])) {
+                // Check for combined route matches
+                foreach ($arg['routes'] as $key => $value) {
+                    if (strpos($key, ',') !== false) {
+                        foreach ($arg['routes'][$key] as $route => $controller) {
+                            $this->setRoutes($key, $route, $controller);
+                        }
+                        unset($arg['routes'][$key]);
+                    }
+                }
+
+                // Check for direct route method matches
                 $routeKeys = array_keys($this->routes);
                 foreach ($routeKeys as $key) {
                     if (isset($arg['routes'][$key])) {
