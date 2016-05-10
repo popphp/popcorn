@@ -4,11 +4,11 @@ Popcorn PHP Micro Framework
 <img src="http://popcorn.popphp.org/img/popcorn-logo-no-shadow.png" width="180" height="180" />
 
 [![Build Status](https://travis-ci.org/popphp/popcorn.svg?branch=master)](https://travis-ci.org/popphp/popcorn)
-[![Coverage Status](http://www.popphp.org/cc/coverage.php?comp=popcorn)](http://www.popphp.org/cc/popcorn/)
+[![Coverage Status](http://cc.popphp.org/coverage.php?comp=popcorn)](http://cc.popphp.org/popcorn/)
 
 RELEASE INFORMATION
 -------------------
-Popcorn PHP REST-Based Micro Framework 2.0.2  
+Popcorn PHP REST-Based Micro Framework 2.0.2
 Released February 29, 2016
 
 OVERVIEW
