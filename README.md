@@ -13,10 +13,11 @@ Released July 1, 2016
 
 OVERVIEW
 --------
-Popcorn PHP Micro Framework is a REST-based micro framework. The biggest changes is
-that it supports 5.4+ only and has been stripped down to the least amount of internal
-dependencies as possible. Going beyond that, Popcorn supports PSR-4 autoloading and
-it now integrated with Composer, much like the new version of [Pop PHP Framework](http://www.popphp.org/).
+Popcorn PHP Micro Framework is a REST-based micro framework. The biggest changes in
+this version are that it supports 5.4+ only and has been stripped down to the least
+amount of internal dependencies as possible. Going beyond that, Popcorn supports
+PSR-4 autoloading and it now integrated with Composer, much like the new version
+of [Pop PHP Framework](http://www.popphp.org/).
 
 Because of these changes, and the changes to the Pop PHP Framework on which it is
 built, it actually makes Popcorn much more streamlined. Before, Popcorn was really
