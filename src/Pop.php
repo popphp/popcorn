@@ -23,7 +23,7 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    2.0.2
+ * @version    2.1.0
  */
 class Pop extends Application
 {
@@ -31,7 +31,7 @@ class Pop extends Application
     /**
      * Current version
      */
-    const VERSION = '2.0.2';
+    const VERSION = '2.1.0';
 
     /**
      * Routes array
