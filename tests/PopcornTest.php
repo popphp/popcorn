@@ -219,7 +219,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLatest()
     {
-        $this->assertEquals('2.0.2', Pop::getLatest());
+        $this->assertEquals('2.1.0', Pop::getLatest());
     }
 
     public function testIsLatest()
