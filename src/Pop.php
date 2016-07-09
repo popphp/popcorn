@@ -23,7 +23,7 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    2.1.0
+ * @version    2.1.1
  */
 class Pop extends Application
 {
@@ -31,7 +31,17 @@ class Pop extends Application
     /**
      * Current version
      */
-    const VERSION = '2.1.0';
+    const VERSION = '2.1.1';
+
+    /**
+     * Version source from GitHub
+     */
+    const VERSION_SOURCE_GITHUB = 'GITHUB';
+
+    /**
+     * Version source from popcorn.popphp.org
+     */
+    const VERSION_SOURCE_POP = 'POP';
 
     /**
      * Routes array
@@ -368,9 +378,42 @@ class Pop extends Application
     /**
      * Returns the latest version available.
      *
+     * @param  string $source
      * @return mixed
      */
-    public static function getLatest()
+    public static function getLatest($source = 'POP')
+    {
+        return ($source == self::VERSION_SOURCE_GITHUB) ? self::getLatestFromGitHub() : self::getLatestFromPop();
+    }
+
+    /**
+     * Returns the latest version available from GitHub.
+     *
+     * @return mixed
+     */
+    public static function getLatestFromGitHub()
+    {
+        $latest = null;
+
+        $context = stream_context_create([
+            'http' => [
+                'user_agent' => sprintf('Pop-Version/%s', self::VERSION),
+            ],
+        ]);
+        $json   = json_decode(
+            file_get_contents('https://api.github.com/repos/popphp/popcorn/releases/latest', false, $context), true
+        );
+        $latest = $json['tag_name'];
+
+        return trim($latest);
+    }
+
+    /**
+     * Returns the latest version available from www.popphp.org.
+     *
+     * @return mixed
+     */
+    public static function getLatestFromPop()
     {
         $latest = null;
 
@@ -386,11 +429,12 @@ class Pop extends Application
     /**
      * Returns whether or not this is the latest version.
      *
+     * @param  string $source
      * @return mixed
      */
-    public static function isLatest()
+    public static function isLatest($source = 'POP')
     {
-        return (self::compareVersion(self::getLatest()) >= 0);
+        return (self::compareVersion(self::getLatest($source)) >= 0);
     }
 
 }
