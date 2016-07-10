@@ -224,7 +224,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testIsLatest()
     {
-        $this->assertTrue(Pop::isLatest('GITHUB'));
+        $this->assertTrue(Pop::isLatest());
     }
 
     public function testIsAllowed()
