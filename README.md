@@ -8,8 +8,8 @@ Popcorn PHP Micro Framework
 
 RELEASE INFORMATION
 -------------------
-Popcorn PHP REST-Based Micro Framework 2.1.1  
-Released July 8, 2016
+Popcorn PHP REST-Based Micro Framework 3.0.0  
+Released July 10, 2016
 
 OVERVIEW
 --------
@@ -57,7 +57,7 @@ $app->get('/', function() {
     echo 'Hello World!';
 });
 
-// Say hello page: http://localhost:8000/hello/nick
+// Say hello page: http://localhost:8000/hello/world
 $app->get('/hello/:name', function($name) {
     echo 'Hello ' . ucfirst($name) . '!';
 });
