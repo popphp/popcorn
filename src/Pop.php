@@ -397,7 +397,7 @@ class Pop extends Application
 
         $context = stream_context_create([
             'http' => [
-                'user_agent' => sprintf('Pop-Version/%s', self::VERSION),
+                'user_agent' => sprintf('Popcorn-Version/%s', self::VERSION),
             ],
         ]);
         $json   = json_decode(
