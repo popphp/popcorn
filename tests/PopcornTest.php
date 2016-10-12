@@ -212,21 +212,6 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
         $get = $app->getRoutes('bad');
     }
 
-    public function testCompareVersion()
-    {
-        $this->assertEquals(1, Pop::compareVersion(1.0));
-    }
-
-    public function testGetLatest()
-    {
-        $this->assertEquals('2.1.1', Pop::getLatest());
-    }
-
-    public function testIsLatest()
-    {
-        $this->assertTrue(Pop::isLatest());
-    }
-
     public function testIsAllowed()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';

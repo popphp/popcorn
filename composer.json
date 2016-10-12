@@ -16,22 +16,18 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "popphp/popphp": "2.1.*",
-        "popphp/pop-http": "2.1.*",
-        "popphp/pop-session": "3.0.*",
-        "popphp/pop-view": "2.1.*"
+        "php": ">=5.6.0",
+        "popphp/popphp": "3.0.*",
+        "popphp/pop-http": "3.0.*",
+        "popphp/pop-session": "3.1.*",
+        "popphp/pop-view": "3.0.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.6.*"
+        "phpunit/phpunit": "5.5.*"
     },
     "suggest": {
-        "popphp/pop-data": "For converting data between different types, SQL, CSV, XML, etc",
         "popphp/pop-db": "For DB management and transactions",
-        "popphp/pop-file": "For file uploads and directory traversing",
-        "popphp/pop-form": "For HTML form generation and validation",
-        "popphp/pop-image": "For image processing and manipulation",
-        "popphp/pop-mail": "For managing and sending mail via PHP"
+        "popphp/pop-form": "For HTML form generation and validation"
     },
     "autoload": {
         "psr-4": {
@@ -45,7 +41,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0.x-dev"
+            "dev-master": "3.1.x-dev"
         }
     }
 }

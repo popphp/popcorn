@@ -23,25 +23,10 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    3.0.0
+ * @version    3.1.0
  */
 class Pop extends Application
 {
-
-    /**
-     * Current version
-     */
-    const VERSION = '3.0.0';
-
-    /**
-     * Version source from GitHub
-     */
-    const VERSION_SOURCE_GITHUB = 'GITHUB';
-
-    /**
-     * Version source from popcorn.popphp.org
-     */
-    const VERSION_SOURCE_POP = 'POP';
 
     /**
      * Routes array
@@ -66,8 +51,6 @@ class Pop extends Application
      *
      * Optional parameters are a service locator instance, a router instance,
      * an event manager instance or a configuration object or array
-     *
-     * @return Pop
      */
     public function __construct()
     {
@@ -353,7 +336,7 @@ class Pop extends Application
         $this->router->match();
 
         if ($this->router->hasRoute() && $this->isAllowed($this->router->getRouteMatch()->getRoute())) {
-            parent::run();
+            parent::run($exit);
         } else {
             $this->trigger('app.error', [
                 'exception' => new Exception(
@@ -362,79 +345,6 @@ class Pop extends Application
             ]);
             $this->router->getRouteMatch()->noRouteFound((bool)$exit);
         }
-    }
-
-    /**
-     * Compares the local version to the latest version available
-     *
-     * @param  string $version
-     * @return mixed
-     */
-    public static function compareVersion($version)
-    {
-        return version_compare(self::VERSION, $version);
-    }
-
-    /**
-     * Returns the latest version available.
-     *
-     * @param  string $source
-     * @return mixed
-     */
-    public static function getLatest($source = 'POP')
-    {
-        return ($source == self::VERSION_SOURCE_GITHUB) ? self::getLatestFromGitHub() : self::getLatestFromPop();
-    }
-
-    /**
-     * Returns the latest version available from GitHub.
-     *
-     * @return mixed
-     */
-    public static function getLatestFromGitHub()
-    {
-        $latest = null;
-
-        $context = stream_context_create([
-            'http' => [
-                'user_agent' => sprintf('Popcorn-Version/%s', self::VERSION)
-            ],
-        ]);
-        $json   = json_decode(
-            file_get_contents('https://api.github.com/repos/popphp/popcorn/releases/latest', false, $context), true
-        );
-        $latest = $json['tag_name'];
-
-        return trim($latest);
-    }
-
-    /**
-     * Returns the latest version available from www.popphp.org.
-     *
-     * @return mixed
-     */
-    public static function getLatestFromPop()
-    {
-        $latest = null;
-
-        $handle = fopen('http://popcorn.popphp.org/version', 'r');
-        if ($handle !== false) {
-            $latest = stream_get_contents($handle);
-            fclose($handle);
-        }
-
-        return trim($latest);
-    }
-
-    /**
-     * Returns whether or not this is the latest version.
-     *
-     * @param  string $source
-     * @return mixed
-     */
-    public static function isLatest($source = 'POP')
-    {
-        return (self::compareVersion(self::getLatest($source)) >= 0);
     }
 
 }
