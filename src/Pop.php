@@ -333,7 +333,7 @@ class Pop extends Application
     {
         // If route is allowed for this method
         $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
-        $this->router->match();
+        $this->router->route();
 
         if ($this->router->hasRoute() && $this->isAllowed($this->router->getRouteMatch()->getRoute())) {
             parent::run($exit);
