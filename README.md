@@ -3,12 +3,13 @@ Popcorn PHP Micro Framework
 
 <img src="http://popcorn.popphp.org/img/popcorn-logo-no-shadow.png" width="180" height="180" />
 
-[![Join the chat at https://gitter.im/popphp/2](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/popphp/2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/popphp/popcorn.svg?branch=master)](https://travis-ci.org/popphp/popcorn)
+[![Coverage Status](http://cc.popphp.org/coverage.php?comp=popcorn)](http://cc.popphp.org/popcorn/)
 
 RELEASE INFORMATION
 -------------------
 Popcorn PHP REST-Based Micro Framework 3.1.0  
-Released December 1, 2016
+Released February 22, 2017
 
 OVERVIEW
 --------
