@@ -60,7 +60,9 @@ class Pop extends Application
             if (is_array($arg) && isset($arg['routes'])) {
                 // Check for combined route matches
                 foreach ($arg['routes'] as $key => $value) {
-                    if (strpos($key, ',') !== false) {
+                    if ($key == '*') {
+                        $this->addToAll($key, $value);
+                    } else if (strpos($key, ',') !== false) {
                         foreach ($arg['routes'][$key] as $route => $controller) {
                             $this->setRoutes($key, $route, $controller);
                         }
@@ -259,6 +261,22 @@ class Pop extends Application
         }
 
         foreach ($methods as $method) {
+            $this->setRoute($method, $route, $controller);
+        }
+        return $this;
+    }
+
+
+    /**
+     * Add to all methods
+     *
+     * @param  string $route
+     * @param  mixed  $controller
+     * @return Pop
+     */
+    public function addToAll($route, $controller)
+    {
+        foreach ($this->routes as $method => $value) {
             $this->setRoute($method, $route, $controller);
         }
         return $this;
