@@ -156,7 +156,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testAddRouteException()
     {
-        $this->setExpectedException('Popcorn\Exception');
+        $this->expectException('Popcorn\Exception');
         $app = new Pop();
         $app->setRoute('bad', '/home', [
             'controller' => function(){
@@ -176,7 +176,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testAddRoutesException()
     {
-        $this->setExpectedException('Popcorn\Exception');
+        $this->expectException('Popcorn\Exception');
         $app = new Pop();
         $app->setRoutes(new \StdClass, '/home', ['controller' => function(){
             echo 'home';
@@ -204,7 +204,7 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRoutesException()
     {
-        $this->setExpectedException('Popcorn\Exception');
+        $this->expectException('Popcorn\Exception');
         $app = new Pop();
         $app->setRoutes('get,post', '/home', ['controller' => function () {
             echo 'home';
@@ -223,9 +223,6 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($app->isAllowed('/home'));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testRun()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';

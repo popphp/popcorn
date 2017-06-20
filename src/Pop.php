@@ -23,7 +23,7 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2017 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    3.1.0
+ * @version    3.1.1
  */
 class Pop extends Application
 {
@@ -102,6 +102,9 @@ class Pop extends Application
                 break;
             case 5:
                 parent::__construct($args[0], $args[1], $args[2], $args[3], $args[4]);
+                break;
+            case 6:
+                parent::__construct($args[0], $args[1], $args[2], $args[3], $args[4], $args[5]);
                 break;
             default:
                 parent::__construct();
