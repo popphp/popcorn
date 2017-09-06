@@ -81,9 +81,7 @@ class Pop extends Application
                     }
                 }
 
-                if (count($arg['routes']) == 0) {
-                    unset($args[$i]['routes']);
-                }
+                unset($args[$i]['routes']);
             }
         }
 
