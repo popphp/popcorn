@@ -237,7 +237,11 @@ class Pop extends Application
             $controller = ['controller' => $controller];
         }
 
-        $this->routes[$method][$route] = $controller;
+        if (isset($this->routes[$method][$route]) && is_array($this->routes[$method][$route])) {
+            $this->routes[$method][$route] = array_merge($this->routes[$method][$route], $controller);
+        } else {
+            $this->routes[$method][$route] = $controller;
+        }
 
         return $this;
     }
@@ -333,9 +337,17 @@ class Pop extends Application
         $allowed = false;
         $method  = strtolower($_SERVER['REQUEST_METHOD']);
 
-        foreach ($this->routes[$method] as $r => $c) {
-            if (substr($r, 0, strlen($route)) == $route) {
+        foreach ($this->routes[$method] as $rte => $ctrl) {
+            if (is_array($ctrl) && !isset($ctrl['controller'])) {
+                foreach ($ctrl as $r => $c) {
+                    if (substr($rte . $r, 0, strlen($route)) == $route) {
+                        $allowed = true;
+                        break;
+                    }
+                }
+            } else if (substr($rte, 0, strlen($route)) == $route) {
                 $allowed = true;
+                break;
             }
         }
 
