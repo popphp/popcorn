@@ -38,7 +38,11 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
                         header('HTTP/1.1 200 OK');
                         echo 'Hello Get and Post!';
                     }
-                ]
+                ],
+                '/something/else' => function() {
+                    header('HTTP/1.1 200 OK');
+                    echo 'Hello Something Else!';
+                }
             ],
             'foo' => 'bar',
             'baz' => [
@@ -52,10 +56,12 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
         $app4 = new Pop($config, new Router(), new Locator(), new Manager());
         $app4 = new Pop($config, new Router(), new Locator(), new Manager(), new ClassLoader());
 
-
         $this->assertInstanceOf('Popcorn\Pop', $app);
         $this->assertTrue(isset($app->getRoute('get', '/')['controller']));
         $this->assertTrue(isset($app->getRoute('post', '/edit/:id')['controller']));
+        $this->assertTrue($app->hasRoute('get', '/something/else'));
+        $this->assertTrue($app->hasRoute('post', '/something/else'));
+        $this->assertFalse($app->hasRoute('delete', '/something/else'));
         $this->assertEquals('bar', $app->config()['foo']);
     }
 

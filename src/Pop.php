@@ -62,6 +62,7 @@ class Pop extends Application
                 foreach ($arg['routes'] as $key => $value) {
                     if ($key == '*') {
                         $this->addToAll($key, $value);
+                        unset($arg['routes'][$key]);
                     } else if (strpos($key, ',') !== false) {
                         foreach ($arg['routes'][$key] as $route => $controller) {
                             $this->setRoutes($key, $route, $controller);
@@ -78,6 +79,14 @@ class Pop extends Application
                             $this->setRoute($key, $route, $controller);
                         }
                         unset($arg['routes'][$key]);
+                    }
+                }
+
+                // Check for static routes that are not assigned to a method,
+                // and auto-assign them to get,post for a fallback
+                if (count($arg['routes']) > 0) {
+                    foreach ($arg['routes'] as $route => $controller) {
+                        $this->setRoutes('get,post', $route, $controller);
                     }
                 }
 
