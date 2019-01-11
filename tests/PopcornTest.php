@@ -7,14 +7,26 @@ use Pop\Event\Manager;
 use Pop\Router\Router;
 use Pop\Service\Locator;
 use Popcorn\Pop;
+use PHPUnit\Framework\TestCase;
 
-class PopcornTest extends \PHPUnit_Framework_TestCase
+class PopcornTest extends TestCase
 {
 
     public function testConstructor()
     {
-        $app = new Pop();
+        $app = new Pop([
+            'routes' => [
+                '*' => [
+                    '/' => function() {
+                        header('HTTP/1.1 200 OK');
+                        echo 'Hello World!';
+                    }
+                ]
+            ]
+        ]);
         $this->assertInstanceOf('Popcorn\Pop', $app);
+        $this->assertTrue($app->hasRoute('get', '/'));
+        $this->assertTrue($app->hasRoute('post', '/'));
     }
 
     public function testConstructorRoutes()
@@ -174,6 +186,16 @@ class PopcornTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Pop();
         $app->setRoutes('get,post', '/home', ['controller' => function(){
+            echo 'home';
+        }]);
+        $this->assertTrue($app->hasRoute('get', '/home'));
+        $this->assertTrue($app->hasRoute('post', '/home'));
+    }
+
+    public function testAddToAll()
+    {
+        $app = new Pop();
+        $app->addToAll('/home', ['controller' => function(){
             echo 'home';
         }]);
         $this->assertTrue($app->hasRoute('get', '/home'));
