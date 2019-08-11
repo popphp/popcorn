@@ -369,16 +369,17 @@ class Pop extends Application
      * Run the application.
      *
      * @param  boolean $exit
+     * @param  string  $forceRoute
      * @return void
      */
-    public function run($exit = true)
+    public function run($exit = true, $forceRoute = null)
     {
         // If route is allowed for this method
         $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
         $this->router->route();
 
         if ($this->router->hasRoute() && $this->isAllowed($this->router->getRouteMatch()->getOriginalRoute())) {
-            parent::run($exit);
+            parent::run($exit, $forceRoute);
         } else {
             $this->trigger('app.error', [
                 'exception' => new Exception(
