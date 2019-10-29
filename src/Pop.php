@@ -23,7 +23,7 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2019 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    3.2.0
+ * @version    3.2.2
  */
 class Pop extends Application
 {
@@ -241,7 +241,7 @@ class Pop extends Application
     public function setRoute($method, $route, $controller)
     {
         if (!array_key_exists(strtolower($method), $this->routes)) {
-            throw new Exception('Error: That method is not allowed.');
+            throw new Exception("Error: The method '" . $method . "' is not allowed.");
         }
 
         if (is_callable($controller)) {
@@ -308,7 +308,7 @@ class Pop extends Application
     public function getRoutes($method = null)
     {
         if ((null !== $method) && !array_key_exists(strtolower($method), $this->routes)) {
-            throw new Exception('Error: That method is not allowed.');
+            throw new Exception("Error: The method '" . $method . "' is not allowed.");
         }
         return (null !== $method) ? $this->routes[$method] : $this->routes;
     }

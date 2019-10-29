@@ -21,6 +21,6 @@ namespace Popcorn;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2019 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    3.2.0
+ * @version    3.2.2
  */
 class Exception extends \Exception {}
