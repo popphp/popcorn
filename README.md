@@ -209,7 +209,7 @@ $app->copy('/image/:id', function(){
 $app->run();
 ```
 
-Then you can submit request with your custom HTTP methods like this:
+Then you can submit requests with your custom HTTP methods like this:
 
     curl -X PURGE http://localhost:8000/image/1
 
