@@ -8,36 +8,26 @@ Popcorn PHP Micro Framework
 
 RELEASE INFORMATION
 -------------------
-Popcorn PHP REST-Based Micro Framework 3.2.0  
-Released January 11, 2019
+Popcorn PHP REST-Based Micro Framework 3.2.2  
+Released October 28, 2019
 
 OVERVIEW
 --------
-Popcorn PHP Micro Framework is a REST-based micro framework. The biggest changes in
-this version are that it supports PHP 7.1+ only and has been stripped down to the least
-amount of internal dependencies as possible. Going beyond that, Popcorn supports
-PSR-4 autoloading and it now integrated with Composer, much like the new version
-of [Pop PHP Framework](http://www.popphp.org/).
-
-Because of these changes, and the changes to the Pop PHP Framework on which it is
-built, it actually makes Popcorn much more streamlined. Before, Popcorn was really
-it's own self-contained thing, borrowing and including components from the previous
-version of the Pop PHP Framework. Now, Popcorn is simply built on top of the new
-version of the core components of [Pop PHP](https://github.com/popphp/popphp) and
-acts as a layer to enforce the REST-based routing rules of a web application.
+Popcorn PHP Micro Framework is a REST-based micro framework.  It is a component of
+[Pop PHP Framework](http://www.popphp.org/). It is a small component that acts as
+a layer for [Pop PHP](https://github.com/popphp/popphp) to enforce the REST-based
+routing rules of a web application. It supports PHP 7.1+.
 
 INSTALL
 -------
-
 Install `popcorn` using Composer.
 
     composer require popphp/popcorn
 
 BASIC USAGE
 -----------
-
-In a simple index.php file, you can define the routes you want to allow
-in your application. In this example, we'll use simple closures as our
+In a simple `index.php` file, you can define the routes you want to allow
+in your application. In this example, a simple closures is used as the
 controllers. The wildcard route '*' can serve as a "catch-all" to handle
 routes that are not found or not allowed.
 
