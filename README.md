@@ -180,6 +180,38 @@ $app->get('/', [
 
 $app->run();
 ```
+
 The 'default' parameter sets the controller as the default controller
 to handle routes that aren't found. Typically, there is a default action
 such as an 'error' method to handle this.
+
+CUSTOM METHODS
+--------------
+
+If your web server allows for you to configure custom HTTP methods, Popcorn
+support that and allow you to register custom HTTP methods with the application.
+
+```php
+use Popcorn\Pop;
+
+$app = new Pop();
+$app->addCustomMethod('PURGE')
+    ->addCustomMethod('COPY');
+
+$app->purge('/image/:id', function(){
+    // Do something with the PURGE method on the image URL
+});
+
+$app->copy('/image/:id', function(){
+    // Do something with the COPY method on the image URL
+});
+
+$app->run();
+```
+
+Then you can submit request with your custom HTTP methods like this:
+
+    curl -X PURGE http://localhost:8000/image/1
+    
+    curl -X COPY http://localhost:8000/image/1
+
