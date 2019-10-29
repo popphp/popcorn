@@ -189,7 +189,7 @@ CUSTOM METHODS
 --------------
 
 If your web server allows for you to configure custom HTTP methods, Popcorn
-support that and allow you to register custom HTTP methods with the application.
+supports that and allows you to register custom HTTP methods with the application.
 
 ```php
 use Popcorn\Pop;
@@ -212,6 +212,6 @@ $app->run();
 Then you can submit request with your custom HTTP methods like this:
 
     curl -X PURGE http://localhost:8000/image/1
-    
+
     curl -X COPY http://localhost:8000/image/1
 
