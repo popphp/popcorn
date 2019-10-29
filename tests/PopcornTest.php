@@ -4,6 +4,7 @@ namespace PopcornTest;
 
 use Composer\Autoload\ClassLoader;
 use Pop\Event\Manager;
+use Pop\Module;
 use Pop\Router\Router;
 use Pop\Service\Locator;
 use Popcorn\Pop;
@@ -66,7 +67,8 @@ class PopcornTest extends TestCase
         $app2 = new Pop($config, new Router());
         $app3 = new Pop($config, new Router(), new Locator());
         $app4 = new Pop($config, new Router(), new Locator(), new Manager());
-        $app4 = new Pop($config, new Router(), new Locator(), new Manager(), new ClassLoader());
+        $app5 = new Pop($config, new Router(), new Locator(), new Manager(), new ClassLoader());
+        $app6 = new Pop($config, new Router(), new Locator(), new Manager(), new ClassLoader(), new Module\Manager());
 
         $this->assertInstanceOf('Popcorn\Pop', $app);
         $this->assertTrue(isset($app->getRoute('get', '/')['controller']));
@@ -265,6 +267,63 @@ class PopcornTest extends TestCase
         $app->run(false);
         $result = ob_get_clean();
         $this->assertFalse(ctype_print($result));
+    }
+
+    public function testCustomMethod()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'PURGE';
+        $_SERVER['REQUEST_URI']    = 'image';
+        $app = new Pop();
+        $app->addCustomMethod('PURGE');
+        $app->purge('image', [
+            'controller' => function(){
+                echo 'image purged';
+            }]);
+
+        $this->assertTrue($app->hasCustomMethod('PURGE'));
+
+        ob_start();
+        $app->run(false);
+        $result = ob_get_clean();
+        $this->assertFalse(ctype_print($result));
+    }
+
+    public function testCustomMethodNotAllowedException()
+    {
+        $this->expectException('Popcorn\Exception');
+        $_SERVER['REQUEST_METHOD'] = 'PURGE';
+        $_SERVER['REQUEST_URI']    = 'image';
+        $app = new Pop();
+        $app->addCustomMethod('PURGE');
+        $app->notpurge('image', [
+            'controller' => function(){
+                echo 'image purged';
+            }]);
+    }
+
+    public function testCustomMethodBadArgumentsException()
+    {
+        $this->expectException('Popcorn\Exception');
+        $_SERVER['REQUEST_METHOD'] = 'PURGE';
+        $_SERVER['REQUEST_URI']    = 'image';
+        $app = new Pop();
+        $app->addCustomMethod('PURGE');
+        $app->purge('image');
+    }
+
+    public function testCustomMethodRunNotAllowedException()
+    {
+        $this->expectException('Popcorn\Exception');
+        $_SERVER['REQUEST_METHOD'] = 'NOTPURGE';
+        $_SERVER['REQUEST_URI']    = 'image';
+        $app = new Pop();
+        $app->addCustomMethod('PURGE');
+        $app->purge('image', [
+            'controller' => function(){
+                echo 'image purged';
+            }]);
+
+        $app->run(false);
     }
 
 }

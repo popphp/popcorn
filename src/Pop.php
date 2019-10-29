@@ -23,7 +23,7 @@ use Pop\Application;
  * @author     Nick Sagona, III <dev@nolainteractive.com>
  * @copyright  Copyright (c) 2009-2019 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    3.2.2
+ * @version    3.3.0
  */
 class Pop extends Application
 {
@@ -230,6 +230,29 @@ class Pop extends Application
     }
 
     /**
+     * Add a custom method
+     *
+     * @param  string $customMethod
+     * @return Pop
+     */
+    public function addCustomMethod($customMethod)
+    {
+        $this->routes[strtolower($customMethod)] = [];
+        return $this;
+    }
+
+    /**
+     * Has a custom method
+     *
+     * @param  string $customMethod
+     * @return boolean
+     */
+    public function hasCustomMethod($customMethod)
+    {
+        return isset($this->routes[strtolower($customMethod)]);
+    }
+
+    /**
      * Add a route
      *
      * @param  string $method
@@ -308,7 +331,7 @@ class Pop extends Application
     public function getRoutes($method = null)
     {
         if ((null !== $method) && !array_key_exists(strtolower($method), $this->routes)) {
-            throw new Exception("Error: The method '" . $method . "' is not allowed.");
+            throw new Exception("Error: The method '" . strtoupper($method) . "' is not allowed.");
         }
         return (null !== $method) ? $this->routes[$method] : $this->routes;
     }
@@ -375,6 +398,11 @@ class Pop extends Application
     public function run($exit = true, $forceRoute = null)
     {
         // If route is allowed for this method
+        if (!isset($this->routes[strtolower($_SERVER['REQUEST_METHOD'])])) {
+            throw new Exception(
+                "Error: The custom method '" . strtoupper($_SERVER['REQUEST_METHOD']) . "' is not allowed."
+            );
+        }
         $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
         $this->router->route();
 
@@ -388,6 +416,29 @@ class Pop extends Application
             ]);
             $this->router->getRouteMatch()->noRouteFound((bool)$exit);
         }
+    }
+
+    /**
+     * Magic method to check for a custom method
+     *
+     * @param  string $methodName
+     * @param  array  $arguments
+     * @throws Exception
+     * @return void
+     */
+    public function __call($methodName, $arguments)
+    {
+        if (!isset($this->routes[strtolower($methodName)])) {
+            throw new Exception("Error: The custom method '" . strtoupper($methodName) . "' is not allowed.");
+        }
+
+        if (count($arguments) != 2) {
+            throw new Exception("Error: You must pass a route and a controller.");
+        }
+
+        [$route, $controller] = $arguments;
+
+        $this->setRoute(strtolower($methodName), $route, $controller);
     }
 
 }
