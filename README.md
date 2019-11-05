@@ -8,8 +8,8 @@ Popcorn PHP Micro Framework
 
 RELEASE INFORMATION
 -------------------
-Popcorn PHP REST-Based Micro Framework 3.2.2  
-Released October 28, 2019
+Popcorn PHP REST-Based Micro Framework 3.3.0  
+Released October 29, 2019
 
 OVERVIEW
 --------
