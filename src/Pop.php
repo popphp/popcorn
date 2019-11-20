@@ -4,7 +4,7 @@
  *
  * @link       https://github.com/popphp/popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2019 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @copyright  Copyright (c) 2009-2020 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
  */
 
@@ -21,7 +21,7 @@ use Pop\Application;
  * @category   Popcorn
  * @package    Popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2019 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @copyright  Copyright (c) 2009-2020 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
  * @version    3.3.0
  */
