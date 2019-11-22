@@ -230,6 +230,18 @@ class Pop extends Application
     }
 
     /**
+     * Add to any and all methods (alias method to addToAll)
+     *
+     * @param  string $route
+     * @param  mixed  $controller
+     * @return Pop
+     */
+    public function any($route, $controller)
+    {
+        return $this->addToAll($route, $controller);
+    }
+
+    /**
      * Add a custom method
      *
      * @param  string $customMethod
@@ -304,7 +316,6 @@ class Pop extends Application
         }
         return $this;
     }
-
 
     /**
      * Add to all methods

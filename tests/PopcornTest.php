@@ -194,6 +194,16 @@ class PopcornTest extends TestCase
         $this->assertTrue($app->hasRoute('post', '/home'));
     }
 
+    public function testAny()
+    {
+        $app = new Pop();
+        $app->any('/home', ['controller' => function(){
+            echo 'home';
+        }]);
+        $this->assertTrue($app->hasRoute('get', '/home'));
+        $this->assertTrue($app->hasRoute('post', '/home'));
+    }
+
     public function testAddToAll()
     {
         $app = new Pop();
