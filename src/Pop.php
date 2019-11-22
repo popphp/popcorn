@@ -393,27 +393,36 @@ class Pop extends Application
      *
      * @param  boolean $exit
      * @param  string  $forceRoute
+     * @throws Exception
      * @return void
      */
     public function run($exit = true, $forceRoute = null)
     {
-        // If route is allowed for this method
+        // If method is not allowed
         if (!isset($this->routes[strtolower($_SERVER['REQUEST_METHOD'])])) {
             throw new Exception(
-                "Error: The custom method '" . strtoupper($_SERVER['REQUEST_METHOD']) . "' is not allowed."
+                "Error: The method '" . strtoupper($_SERVER['REQUEST_METHOD']) . "' is not allowed.", 405
             );
         }
+
+        // Route request
         $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
         $this->router->route();
 
+        // If route is allowed for this method
         if ($this->router->hasRoute() && $this->isAllowed($this->router->getRouteMatch()->getOriginalRoute())) {
             parent::run($exit, $forceRoute);
+        // Else, handle error
         } else {
-            $this->trigger('app.error', [
-                'exception' => new Exception(
-                    'Error: That route was not ' . (($this->router->hasRoute()) ? 'allowed' : 'found') . '.'
-                )
-            ]);
+            if ($this->router->hasRoute()) {
+                $message = "Error: The route '" . $_SERVER['REQUEST_URI'] .
+                    "' is not allowed on the '" . strtoupper($_SERVER['REQUEST_METHOD']) . "' method";
+            } else {
+                $message = "Error: That route '" . $_SERVER['REQUEST_URI'] . "' was not found for the '" .
+                    strtoupper($_SERVER['REQUEST_METHOD']) . "' method";
+            }
+
+            $this->trigger('app.error', ['exception' => new Exception($message, 404)]);
             $this->router->getRouteMatch()->noRouteFound((bool)$exit);
         }
     }
