@@ -17,8 +17,8 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "popphp/popphp": "^3.3.3",
-        "popphp/pop-http": "^3.5.0",
+        "popphp/popphp": "^3.4.0",
+        "popphp/pop-http": "^4.0.0",
         "popphp/pop-session": "^3.2.0",
         "popphp/pop-view": "^3.2.0"
     },
