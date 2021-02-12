@@ -3,20 +3,20 @@ Popcorn PHP Micro Framework
 
 <img src="http://www.popphp.org/assets/img/popcorn-logo-shadow.png" width="180" height="180" />
 
-[![Build Status](https://travis-ci.org/popphp/popcorn.svg?branch=master)](https://travis-ci.org/popphp/popcorn)
+[![Build Status](https://github.com/popphp/popcorn/workflows/phpunit/badge.svg)](https://github.com/popphp/popcorn/actions)
 [![Coverage Status](http://cc.popphp.org/coverage.php?comp=popcorn)](http://cc.popphp.org/popcorn/)
 
 RELEASE INFORMATION
 -------------------
-Popcorn PHP REST-Based Micro Framework 3.3.0  
-Released October 29, 2019
+Popcorn PHP REST-Based Micro Framework 3.4.0  
+Released February 12, 2021 
 
 OVERVIEW
 --------
 Popcorn PHP Micro Framework is a REST-based micro framework.  It is a component of
 [Pop PHP Framework](http://www.popphp.org/). It is a small component that acts as
 a layer for [Pop PHP](https://github.com/popphp/popphp) to enforce the REST-based
-routing rules of a web application. It supports PHP 7.1+.
+routing rules of a web application. It supports PHP 7.3+.
 
 INSTALL
 -------
