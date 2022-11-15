@@ -8,15 +8,15 @@ Popcorn PHP Micro Framework
 
 RELEASE INFORMATION
 -------------------
-Popcorn PHP REST-Based Micro Framework 3.4.0  
-Released February 12, 2021 
+Popcorn PHP REST-Based Micro Framework 3.4.1  
+Released November 14, 2022 
 
 OVERVIEW
 --------
 Popcorn PHP Micro Framework is a REST-based micro framework.  It is a component of
 [Pop PHP Framework](http://www.popphp.org/). It is a small component that acts as
 a layer for [Pop PHP](https://github.com/popphp/popphp) to enforce the REST-based
-routing rules of a web application. It supports PHP 7.3+.
+routing rules of a web application. It supports PHP 7.4+.
 
 INSTALL
 -------
