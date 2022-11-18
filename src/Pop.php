@@ -65,7 +65,7 @@ class Pop extends Application
                             $this->addToAll($route, $controller);
                         }
                         unset($arg['routes'][$key]);
-                    } else if (strpos($key, ',') !== false) {
+                    } else if (strpos((string)$key, ',') !== false) {
                         foreach ($arg['routes'][$key] as $route => $controller) {
                             $this->setRoutes($key, $route, $controller);
                         }
@@ -261,7 +261,7 @@ class Pop extends Application
      */
     public function hasCustomMethod($customMethod)
     {
-        return isset($this->routes[strtolower($customMethod)]);
+        return isset($this->routes[strtolower((string)$customMethod)]);
     }
 
     /**
@@ -275,7 +275,7 @@ class Pop extends Application
      */
     public function setRoute($method, $route, $controller)
     {
-        if (!array_key_exists(strtolower($method), $this->routes)) {
+        if (!array_key_exists(strtolower((string)$method), $this->routes)) {
             throw new Exception("Error: The method '" . $method . "' is not allowed.");
         }
 
@@ -304,7 +304,7 @@ class Pop extends Application
     public function setRoutes($methods, $route, $controller)
     {
         if (is_string($methods)) {
-            $methods = explode(',', str_replace(', ', ',', strtolower($methods)));
+            $methods = explode(',', str_replace(', ', ',', strtolower((string)$methods)));
         }
 
         if (!is_array($methods)) {
@@ -341,8 +341,8 @@ class Pop extends Application
      */
     public function getRoutes($method = null)
     {
-        if ((null !== $method) && !array_key_exists(strtolower($method), $this->routes)) {
-            throw new Exception("Error: The method '" . strtoupper($method) . "' is not allowed.");
+        if ((null !== $method) && !array_key_exists(strtolower((string)$method), $this->routes)) {
+            throw new Exception("Error: The method '" . strtoupper((string)$method) . "' is not allowed.");
         }
         return (null !== $method) ? $this->routes[$method] : $this->routes;
     }
@@ -381,6 +381,7 @@ class Pop extends Application
     {
         $allowed = false;
         $method  = strtolower($_SERVER['REQUEST_METHOD']);
+        $route   = (string)$route;
 
         foreach ($this->routes[$method] as $rte => $ctrl) {
             if (is_array($ctrl) && !isset($ctrl['controller'])) {
@@ -410,14 +411,14 @@ class Pop extends Application
     public function run($exit = true, $forceRoute = null)
     {
         // If method is not allowed
-        if (!isset($this->routes[strtolower($_SERVER['REQUEST_METHOD'])])) {
+        if (!isset($this->routes[strtolower((string)$_SERVER['REQUEST_METHOD'])])) {
             throw new Exception(
-                "Error: The method '" . strtoupper($_SERVER['REQUEST_METHOD']) . "' is not allowed.", 405
+                "Error: The method '" . strtoupper((string)$_SERVER['REQUEST_METHOD']) . "' is not allowed.", 405
             );
         }
 
         // Route request
-        $this->router->addRoutes($this->routes[strtolower($_SERVER['REQUEST_METHOD'])]);
+        $this->router->addRoutes($this->routes[strtolower((string)$_SERVER['REQUEST_METHOD'])]);
         $this->router->route();
 
         // If route is allowed for this method
@@ -427,10 +428,10 @@ class Pop extends Application
         } else {
             if ($this->router->hasRoute()) {
                 $message = "Error: The route '" . $_SERVER['REQUEST_URI'] .
-                    "' is not allowed on the '" . strtoupper($_SERVER['REQUEST_METHOD']) . "' method";
+                    "' is not allowed on the '" . strtoupper((string)$_SERVER['REQUEST_METHOD']) . "' method";
             } else {
                 $message = "Error: That route '" . $_SERVER['REQUEST_URI'] . "' was not found for the '" .
-                    strtoupper($_SERVER['REQUEST_METHOD']) . "' method";
+                    strtoupper((string)$_SERVER['REQUEST_METHOD']) . "' method";
             }
 
             $this->trigger('app.error', ['exception' => new Exception($message, 404)]);
@@ -458,7 +459,7 @@ class Pop extends Application
 
         [$route, $controller] = $arguments;
 
-        $this->setRoute(strtolower($methodName), $route, $controller);
+        $this->setRoute(strtolower((string)$methodName), $route, $controller);
     }
 
 }
