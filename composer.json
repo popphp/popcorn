@@ -18,12 +18,12 @@
     "require": {
         "php": ">=7.4.0",
         "popphp/popphp": "^3.7.2",
-        "popphp/pop-http": "^4.1.6",
+        "popphp/pop-http": "^4.2.0",
         "popphp/pop-session": "^3.4.1",
         "popphp/pop-view": "^3.3.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0.0"
+        "phpunit/phpunit": "^9.5.0"
     },
     "suggest": {
         "popphp/pop-db": "For DB management and transactions",
