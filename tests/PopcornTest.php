@@ -214,15 +214,6 @@ class PopcornTest extends TestCase
         $this->assertTrue($app->hasRoute('post', '/home'));
     }
 
-    public function testAddRoutesException()
-    {
-        $this->expectException('Popcorn\Exception');
-        $app = new Pop();
-        $app->setRoutes(new \StdClass, '/home', ['controller' => function(){
-            echo 'home';
-        }]);
-    }
-
     public function testGetRoute()
     {
         $app = new Pop();

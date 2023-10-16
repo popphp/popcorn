@@ -4,7 +4,7 @@
  *
  * @link       https://github.com/popphp/popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2023 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @copyright  Copyright (c) 2009-2024 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
  */
 
@@ -21,9 +21,9 @@ use Pop\Application;
  * @category   Popcorn
  * @package    Popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2023 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @copyright  Copyright (c) 2009-2024 NOLA Interactive, LLC. (http://www.nolainteractive.com)
  * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    3.4.2
+ * @version    4.0.0
  */
 class Pop extends Application
 {
@@ -32,7 +32,7 @@ class Pop extends Application
      * Routes array
      * @var array
      */
-    protected $routes = [
+    protected array $routes = [
         'get'     => [],
         'head'    => [],
         'post'    => [],
@@ -51,6 +51,8 @@ class Pop extends Application
      *
      * Optional parameters are a service locator instance, a router instance,
      * an event manager instance or a configuration object or array
+     *
+     * @throws Exception
      */
     public function __construct()
     {
@@ -65,7 +67,7 @@ class Pop extends Application
                             $this->addToAll($route, $controller);
                         }
                         unset($arg['routes'][$key]);
-                    } else if (strpos((string)$key, ',') !== false) {
+                    } else if (str_contains((string)$key, ',')) {
                         foreach ($arg['routes'][$key] as $route => $controller) {
                             $this->setRoutes($key, $route, $controller);
                         }
@@ -125,10 +127,11 @@ class Pop extends Application
      * Add a GET route
      *
      * @param  string $route
-     * @param  mixed  $controller
+     * @param  mixed $controller
+     * @throws Exception
      * @return Pop
      */
-    public function get($route, $controller)
+    public function get(string $route, mixed $controller): Pop
     {
         return $this->setRoute('get', $route, $controller);
     }
@@ -138,9 +141,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function head($route, $controller)
+    public function head(string $route, mixed $controller): Pop
     {
         return $this->setRoute('head', $route, $controller);
     }
@@ -150,9 +154,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function post($route, $controller)
+    public function post(string $route, mixed $controller): Pop
     {
         return $this->setRoute('post', $route, $controller);
     }
@@ -162,9 +167,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function put($route, $controller)
+    public function put(string $route, mixed $controller): Pop
     {
         return $this->setRoute('put', $route, $controller);
     }
@@ -174,9 +180,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function delete($route, $controller)
+    public function delete(string $route, mixed $controller): Pop
     {
         return $this->setRoute('delete', $route, $controller);
     }
@@ -186,9 +193,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function trace($route, $controller)
+    public function trace(string $route, mixed $controller): Pop
     {
         return $this->setRoute('trace', $route, $controller);
     }
@@ -198,9 +206,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function options($route, $controller)
+    public function options(string $route, mixed $controller): Pop
     {
         return $this->setRoute('options', $route, $controller);
     }
@@ -210,9 +219,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function connect($route, $controller)
+    public function connect(string $route, mixed $controller): Pop
     {
         return $this->setRoute('connect', $route,  $controller);
     }
@@ -222,9 +232,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function patch($route, $controller)
+    public function patch(string $route, mixed $controller): Pop
     {
         return $this->setRoute('patch', $route, $controller);
     }
@@ -236,7 +247,7 @@ class Pop extends Application
      * @param  mixed  $controller
      * @return Pop
      */
-    public function any($route, $controller)
+    public function any(string $route, mixed $controller): Pop
     {
         return $this->addToAll($route, $controller);
     }
@@ -247,7 +258,7 @@ class Pop extends Application
      * @param  string $customMethod
      * @return Pop
      */
-    public function addCustomMethod($customMethod)
+    public function addCustomMethod(string $customMethod): Pop
     {
         $this->routes[strtolower($customMethod)] = [];
         return $this;
@@ -257,11 +268,11 @@ class Pop extends Application
      * Has a custom method
      *
      * @param  string $customMethod
-     * @return boolean
+     * @return bool
      */
-    public function hasCustomMethod($customMethod)
+    public function hasCustomMethod(string $customMethod): bool
     {
-        return isset($this->routes[strtolower((string)$customMethod)]);
+        return isset($this->routes[strtolower($customMethod)]);
     }
 
     /**
@@ -273,7 +284,7 @@ class Pop extends Application
      * @throws Exception
      * @return Pop
      */
-    public function setRoute($method, $route, $controller)
+    public function setRoute(string $method, string $route, mixed $controller): Pop
     {
         if (!array_key_exists(strtolower((string)$method), $this->routes)) {
             throw new Exception("Error: The method '" . $method . "' is not allowed.");
@@ -301,14 +312,10 @@ class Pop extends Application
      * @throws Exception
      * @return Pop
      */
-    public function setRoutes($methods, $route, $controller)
+    public function setRoutes(array|string $methods, string $route, mixed $controller): Pop
     {
         if (is_string($methods)) {
-            $methods = explode(',', str_replace(', ', ',', strtolower((string)$methods)));
-        }
-
-        if (!is_array($methods)) {
-            throw new Exception('Error: The $methods parameter must be either an array or a comma-delimited string.');
+            $methods = array_map('trim', explode(',', strtolower($methods)));
         }
 
         foreach ($methods as $method) {
@@ -322,9 +329,10 @@ class Pop extends Application
      *
      * @param  string $route
      * @param  mixed  $controller
+     * @throws Exception
      * @return Pop
      */
-    public function addToAll($route, $controller)
+    public function addToAll(string $route, mixed $controller): Pop
     {
         foreach ($this->routes as $method => $value) {
             $this->setRoute($method, $route, $controller);
@@ -335,16 +343,16 @@ class Pop extends Application
     /**
      * Method to get all routes
      *
-     * @param  string $method
+     * @param  ?string $method
      * @throws Exception
      * @return array
      */
-    public function getRoutes($method = null)
+    public function getRoutes(?string $method = null): array
     {
-        if ((null !== $method) && !array_key_exists(strtolower((string)$method), $this->routes)) {
-            throw new Exception("Error: The method '" . strtoupper((string)$method) . "' is not allowed.");
+        if (($method !== null) && !array_key_exists(strtolower($method), $this->routes)) {
+            throw new Exception("Error: The method '" . strtoupper($method) . "' is not allowed.");
         }
-        return (null !== $method) ? $this->routes[$method] : $this->routes;
+        return ($method !== null) ? $this->routes[$method] : $this->routes;
     }
 
     /**
@@ -354,7 +362,7 @@ class Pop extends Application
      * @param  string $route
      * @return mixed
      */
-    public function getRoute($method, $route)
+    public function getRoute(string $method, string $route): mixed
     {
         return ($this->hasRoute($method, $route)) ? $this->routes[$method][$route] : null;
     }
@@ -364,9 +372,9 @@ class Pop extends Application
      *
      * @param  string $method
      * @param  string $route
-     * @return boolean
+     * @return bool
      */
-    public function hasRoute($method, $route)
+    public function hasRoute(string $method, string $route): bool
     {
         return (isset($this->routes[$method]) && isset($this->routes[$method][$route]));
     }
@@ -375,9 +383,9 @@ class Pop extends Application
      * Determine if the route is allowed on for the method
      *
      * @param  string $route
-     * @return boolean
+     * @return bool
      */
-    public function isAllowed($route)
+    public function isAllowed(string $route): bool
     {
         $allowed = false;
         $method  = strtolower($_SERVER['REQUEST_METHOD']);
@@ -386,12 +394,12 @@ class Pop extends Application
         foreach ($this->routes[$method] as $rte => $ctrl) {
             if (is_array($ctrl) && !isset($ctrl['controller'])) {
                 foreach ($ctrl as $r => $c) {
-                    if (substr($rte . $r, 0, strlen($route)) == $route) {
+                    if (str_starts_with($rte . $r, $route)) {
                         $allowed = true;
                         break;
                     }
                 }
-            } else if (substr($rte, 0, strlen($route)) == $route) {
+            } else if (str_starts_with($rte, $route)) {
                 $allowed = true;
                 break;
             }
@@ -403,12 +411,12 @@ class Pop extends Application
     /**
      * Run the application.
      *
-     * @param  boolean $exit
-     * @param  string  $forceRoute
-     * @throws Exception
+     * @param bool $exit
+     * @param  ?string $forceRoute
+     * @throws Exception|\Pop\Event\Exception|\Pop\Router\Exception|\ReflectionException
      * @return void
      */
-    public function run($exit = true, $forceRoute = null)
+    public function run(bool $exit = true, ?string $forceRoute = null): void
     {
         // If method is not allowed
         if (!isset($this->routes[strtolower((string)$_SERVER['REQUEST_METHOD'])])) {
@@ -447,7 +455,7 @@ class Pop extends Application
      * @throws Exception
      * @return void
      */
-    public function __call($methodName, $arguments)
+    public function __call(string $methodName, array $arguments): void
     {
         if (!isset($this->routes[strtolower($methodName)])) {
             throw new Exception("Error: The custom method '" . strtoupper($methodName) . "' is not allowed.");
