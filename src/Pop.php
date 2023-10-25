@@ -382,10 +382,10 @@ class Pop extends Application
     /**
      * Determine if the route is allowed on for the method
      *
-     * @param  string $route
+     * @param  ?string $route
      * @return bool
      */
-    public function isAllowed(string $route): bool
+    public function isAllowed(?string $route = null): bool
     {
         $allowed = false;
         $method  = strtolower($_SERVER['REQUEST_METHOD']);
