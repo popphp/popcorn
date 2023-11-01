@@ -6,20 +6,34 @@ Popcorn PHP Micro Framework
 [![Build Status](https://github.com/popphp/popcorn/workflows/phpunit/badge.svg)](https://github.com/popphp/popcorn/actions)
 [![Coverage Status](http://cc.popphp.org/coverage.php?comp=popcorn)](http://cc.popphp.org/popcorn/)
 
+[![Join the chat at https://popphp.slack.com](https://media.popphp.org/img/slack.svg)](https://popphp.slack.com)
+[![Join the chat at https://discord.gg/D9JBxPa5](https://media.popphp.org/img/discord.svg)](https://discord.gg/D9JBxPa5)
+
+* [Overview](#overview)
+* [Install](#install)
+* [Quickstart](#quickstart)
+* [Advanced](#advanced)
+* [Custom Methods](#custom-methods)
+
 RELEASE INFORMATION
 -------------------
+
 Popcorn PHP REST-Based Micro Framework 4.0.0  
 Released October 16, 2023 
 
-OVERVIEW
+Overview
 --------
+
 Popcorn PHP Micro Framework is a REST-based micro framework.  It is a component of
 [Pop PHP Framework](http://www.popphp.org/). It is a small component that acts as
 a layer for [Pop PHP](https://github.com/popphp/popphp) to enforce the REST-based
 routing rules of a web application. It supports PHP 8.1+.
 
-INSTALL
+[Top](#popcorn-php-micro-framework)
+
+Install
 -------
+
 Install `popcorn` using Composer.
 
     composer require popphp/popcorn
@@ -30,8 +44,11 @@ Or, require it in your composer.json file
         "popphp/popcorn" : "^4.0.0"
     }
 
-BASIC USAGE
------------
+[Top](#popcorn-php-micro-framework)
+
+Quickstart
+----------
+
 In a simple `index.php` file, you can define the routes you want to allow
 in your application. In this example, a simple closures is used as the
 controllers. The wildcard route '*' can serve as a "catch-all" to handle
@@ -76,14 +93,20 @@ via POST, but with the wrong application token, it will return the
 'Auth failed' message as enforced by the application. Access the URL
 via POST with the correct application token, and it will be successful:
 
-    curl -X POST --header "Authorization: bad-token" http://localhost:8000/auth
-    Auth failed
+```bash
+$ curl -X POST --header "Authorization: bad-token" http://localhost:8000/auth
+  Auth failed
+```
 
-    curl -X POST --header "Authorization: my-token" http://localhost:8000/auth
-    Auth successful
+```bash
+$ curl -X POST --header "Authorization: my-token" http://localhost:8000/auth
+  Auth successful
+```
 
-ADVANCED USAGE
---------------
+[Top](#popcorn-php-micro-framework)
+
+Advanced
+--------
 
 In a more advanced example, we can take advantage of more of an MVC-style
 of wiring up an application using the core components of Pop PHP with
@@ -191,7 +214,9 @@ The 'default' parameter sets the controller as the default controller
 to handle routes that aren't found. Typically, there is a default action
 such as an 'error' method to handle this.
 
-CUSTOM METHODS
+[Top](#popcorn-php-micro-framework)
+
+Custom Methods
 --------------
 
 If your web server allows for you to configure custom HTTP methods, Popcorn
@@ -217,7 +242,10 @@ $app->run();
 
 Then you can submit requests with your custom HTTP methods like this:
 
-    curl -X PURGE http://localhost:8000/image/1
-
-    curl -X COPY http://localhost:8000/image/1
+```bash
+$ curl -X PURGE http://localhost:8000/image/1
+```
+```bash
+$ curl -X COPY http://localhost:8000/image/1
+```
 
