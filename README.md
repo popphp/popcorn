@@ -132,17 +132,19 @@ use Pop\View\View;
 class IndexController extends AbstractController
 {
 
-    protected $response;
-    protected $viewPath;
+    protected Request $response;
+    protected Response $viewPath;
 
-    public function __construct(Request $request = new Request(), Response $response = new Response())
+    public function __construct(
+        Request $request = new Request(), Response $response = new Response()
+    ): void
     {
         $this->request  = $request;
         $this->response = $response;
         $this->viewPath = __DIR__ . '/../view/';
     }
 
-    public function index()
+    public function index(): void
     {
         $view        = new View($this->viewPath . '/index.phtml');
         $view->title = 'Hello';
@@ -151,7 +153,7 @@ class IndexController extends AbstractController
         $this->response->send();
     }
 
-    public function hello($name)
+    public function hello($name): void
     {
         $view        = new View($this->viewPath . '/index.phtml');
         $view->title = 'Hello ' . $name;
@@ -160,7 +162,7 @@ class IndexController extends AbstractController
         $this->response->send();
     }
 
-    public function error()
+    public function error(): void
     {
         $view        = new View($this->viewPath . '/error.phtml');
         $view->title =  'Error';
