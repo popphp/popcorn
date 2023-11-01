@@ -132,7 +132,7 @@ use Pop\View\View;
 class IndexController extends AbstractController
 {
 
-    protected Request $response;
+    protected Request  $response;
     protected Response $viewPath;
 
     public function __construct(
@@ -228,9 +228,9 @@ $app->get('/', [
 $app->run();
 ```
 
-The `default` parameter sets the controller as the default controller
-to handle routes that aren't found. Typically, there is a default action
-such as an `error` method to handle this.
+The `default` parameter sets the controller as the default controller to handle
+routes that aren't found. Typically, there is a default action in the controller,
+such as an `error` method, to handle this.
 
 [Top](#popcorn-php-micro-framework)
 
