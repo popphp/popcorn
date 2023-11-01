@@ -144,8 +144,17 @@ class IndexController extends AbstractController
 
     public function index()
     {
-        $view = new View($this->viewPath . '/index.phtml');
-        $view->title = 'Welcome';
+        $view        = new View($this->viewPath . '/index.phtml');
+        $view->title = 'Hello';
+
+        $this->response->setBody($view->render());
+        $this->response->send();
+    }
+
+    public function hello($name)
+    {
+        $view        = new View($this->viewPath . '/index.phtml');
+        $view->title = 'Hello ' . $name;
 
         $this->response->setBody($view->render());
         $this->response->send();
@@ -153,7 +162,7 @@ class IndexController extends AbstractController
 
     public function error()
     {
-        $view = new View($this->viewPath . '/error.phtml');
+        $view        = new View($this->viewPath . '/error.phtml');
         $view->title =  'Error';
 
         $this->response->setBody($view->render());
@@ -176,7 +185,6 @@ and two view scripts, `index.phtml` and `error.phtml`, respectively:
 
 <body>
     <h1><?=$title; ?></h1>
-    <p>Hello World.</p>
 </body>
 
 </html>
@@ -210,15 +218,17 @@ $app->get('/', [
     'controller' => 'MyApp\Controller\IndexController',
     'action'     => 'index',
     'default'    => true
+])->get('/hello/:name', [
+    'controller' => 'MyApp\Controller\IndexController',
+    'action'     => 'hello'
 ]);
-
 
 $app->run();
 ```
 
-The 'default' parameter sets the controller as the default controller
+The `default` parameter sets the controller as the default controller
 to handle routes that aren't found. Typically, there is a default action
-such as an 'error' method to handle this.
+such as an `error` method to handle this.
 
 [Top](#popcorn-php-micro-framework)
 
