@@ -95,9 +95,9 @@ $app->run();
 ```
 
 If you attempted access that above URL via GET (or any method that wasn't POST),
-it would fail. If you access that URL via POST, but with the wrong application
-token, it will return the `Auth failed` message as enforced by the application.
-Access the URL via POST with the correct application token, and it will be successful.
+it would fail. If you access that URL via POST, but with the wrong token, it will
+return the `Auth failed` message as enforced by the application. Access the URL
+via POST with the correct token, and it will be successful.
 
 ```bash
 $ curl -X POST --header "Authorization: bad-token" http://localhost/auth
