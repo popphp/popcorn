@@ -237,7 +237,7 @@ such as an `error` method, to handle this.
 Custom Methods
 --------------
 
-If your web server allows for you to configure custom HTTP methods, Popcorn
+If your web server allows the configuration of custom HTTP methods, Popcorn
 supports that and allows you to register custom HTTP methods with the application.
 
 ```php
