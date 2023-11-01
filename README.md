@@ -51,9 +51,9 @@ Quickstart
 ----------
 
 In a simple `index.php` file, you can define the routes you want to allow
-in your application. In this example, simple closures are used as the
-controllers. The wildcard route '*' can serve as a "catch-all" to handle
-routes that are not found or not allowed.
+in your application. In this example, closures are used as the controllers.
+The wildcard route '*' can serve as a "catch-all" to handle routes that are
+not found or not allowed.
 
 ```php
 use Popcorn\Pop;
