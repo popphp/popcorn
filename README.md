@@ -51,7 +51,7 @@ Quickstart
 ----------
 
 In a simple `index.php` file, you can define the routes you want to allow
-in your application. In this example, a simple closures is used as the
+in your application. In this example, simple closures are used as the
 controllers. The wildcard route '*' can serve as a "catch-all" to handle
 routes that are not found or not allowed.
 
@@ -60,12 +60,12 @@ use Popcorn\Pop;
 
 $app = new Pop();
 
-// Home page: http://localhost:8000/
+// Home page: GET http://localhost/
 $app->get('/', function() {
     echo 'Hello World!';
 });
 
-// Say hello page: http://localhost:8000/hello/world
+// Say hello page: GET http://localhost/hello/world
 $app->get('/hello/:name', function($name) {
     echo 'Hello ' . ucfirst($name) . '!';
 });
@@ -75,8 +75,14 @@ $app->get('*', function() {
     header('HTTP/1.1 404 Not Found');
     echo 'Page Not Found.';
 });
+```
 
-// Post route to process an auth request
+The above example defines two `GET` routes and wildcard to handle failures.
+
+We can define a `POST` route like in this example below:
+
+```php
+// Post auth route: POST http://localhost/auth
 $app->post('/auth', function() {
     if ($_SERVER['HTTP_AUTHORIZATION'] == 'my-token') {
         echo 'Auth successful';
@@ -88,19 +94,18 @@ $app->post('/auth', function() {
 $app->run();
 ```
 
-In the above POST example, if you attempted access that URL via GET
-(or any method that wasn't POST), it would fail. If you access that URL
-via POST, but with the wrong application token, it will return the
-'Auth failed' message as enforced by the application. Access the URL
-via POST with the correct application token, and it will be successful:
+If you attempted access that above URL via GET (or any method that wasn't POST),
+it would fail. If you access that URL via POST, but with the wrong application
+token, it will return the `Auth failed` message as enforced by the application.
+Access the URL via POST with the correct application token, and it will be successful.
 
 ```bash
-$ curl -X POST --header "Authorization: bad-token" http://localhost:8000/auth
+$ curl -X POST --header "Authorization: bad-token" http://localhost/auth
   Auth failed
 ```
 
 ```bash
-$ curl -X POST --header "Authorization: my-token" http://localhost:8000/auth
+$ curl -X POST --header "Authorization: my-token" http://localhost/auth
   Auth successful
 ```
 
@@ -120,8 +125,8 @@ Popcorn. Keeping it simple, let's look at a controller class
 namespace MyApp\Controller;
 
 use Pop\Controller\AbstractController;
-use Pop\Http\Request;
-use Pop\Http\Response;
+use Pop\Http\Server\Request;
+use Pop\Http\Server\Response;
 use Pop\View\View;
 
 class IndexController extends AbstractController
@@ -130,10 +135,10 @@ class IndexController extends AbstractController
     protected $response;
     protected $viewPath;
 
-    public function __construct()
+    public function __construct(Request $request = new Request(), Response $response = new Response())
     {
-        $this->request = new Request();
-        $this->response = new Response();
+        $this->request  = $request;
+        $this->response = $response;
         $this->viewPath = __DIR__ . '/../view/';
     }
 
@@ -244,10 +249,10 @@ $app->run();
 Then you can submit requests with your custom HTTP methods like this:
 
 ```bash
-$ curl -X PURGE http://localhost:8000/image/1
+$ curl -X PURGE http://localhost/image/1
 ```
 ```bash
-$ curl -X COPY http://localhost:8000/image/1
+$ curl -X COPY http://localhost/image/1
 ```
 
 [Top](#popcorn-php-micro-framework)
