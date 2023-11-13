@@ -132,8 +132,9 @@ use Pop\View\View;
 class IndexController extends AbstractController
 {
 
-    protected Request  $response;
-    protected Response $viewPath;
+    protected Request  $request;
+    protected Response $response;
+    protected string   $viewPath;
 
     public function __construct(
         Request $request = new Request(), Response $response = new Response()
