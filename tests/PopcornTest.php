@@ -16,6 +16,7 @@ class PopcornTest extends TestCase
     public function testConstructor()
     {
         $app = new Pop([
+            'custom_methods' => ['PURGE'],
             'routes' => [
                 '*' => [
                     '/' => function() {
@@ -28,11 +29,13 @@ class PopcornTest extends TestCase
         $this->assertInstanceOf('Popcorn\Pop', $app);
         $this->assertTrue($app->hasRoute('get', '/'));
         $this->assertTrue($app->hasRoute('post', '/'));
+        $this->assertTrue($app->hasCustomMethod('PURGE'));
     }
 
     public function testConstructorRoutes()
     {
         $config = [
+            'custom_methods' => 'PURGE',
             'routes' => [
                 'get' => [
                     '/' => function() {
@@ -77,6 +80,7 @@ class PopcornTest extends TestCase
         $this->assertTrue($app->hasRoute('post', '/something/else'));
         $this->assertFalse($app->hasRoute('delete', '/something/else'));
         $this->assertEquals('bar', $app->config()['foo']);
+        $this->assertTrue($app->hasCustomMethod('PURGE'));
     }
 
     public function testAddGetRoute()
@@ -275,7 +279,7 @@ class PopcornTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'PURGE';
         $_SERVER['REQUEST_URI']    = 'image';
         $app = new Pop();
-        $app->addCustomMethod('PURGE');
+        $app->addCustomMethods(['PURGE']);
         $app->purge('image', [
             'controller' => function(){
                 echo 'image purged';

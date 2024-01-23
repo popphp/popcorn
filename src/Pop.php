@@ -59,42 +59,55 @@ class Pop extends Application
         $args = func_get_args();
 
         foreach ($args as $i => $arg) {
-            if (is_array($arg) && isset($arg['routes'])) {
-                // Check for combined route matches
-                foreach ($arg['routes'] as $key => $value) {
-                    if ($key == '*') {
-                        foreach ($arg['routes'][$key] as $route => $controller) {
-                            $this->addToAll($route, $controller);
-                        }
-                        unset($arg['routes'][$key]);
-                    } else if (str_contains((string)$key, ',')) {
-                        foreach ($arg['routes'][$key] as $route => $controller) {
-                            $this->setRoutes($key, $route, $controller);
-                        }
-                        unset($arg['routes'][$key]);
+            if (is_array($arg)) {
+                // Handle custom methods config
+                if (isset($arg['custom_methods'])) {
+                    if (is_array($arg['custom_methods'])) {
+                        $this->addCustomMethods($arg['custom_methods']);
+                    } else {
+                        $this->addCustomMethod($arg['custom_methods']);
                     }
+                    unset($args[$i]['custom_methods']);
                 }
 
-                // Check for direct route method matches
-                $routeKeys = array_keys($this->routes);
-                foreach ($routeKeys as $key) {
-                    if (isset($arg['routes'][$key])) {
-                        foreach ($arg['routes'][$key] as $route => $controller) {
-                            $this->setRoute($key, $route, $controller);
+                // Handle routes config
+                if (isset($arg['routes'])) {
+                    // Check for combined route matches
+                    foreach ($arg['routes'] as $key => $value) {
+                        if ($key == '*') {
+                            foreach ($arg['routes'][$key] as $route => $controller) {
+                                $this->addToAll($route, $controller);
+                            }
+                            unset($arg['routes'][$key]);
+                        } else if (str_contains((string)$key, ',')) {
+                            foreach ($arg['routes'][$key] as $route => $controller) {
+                                $this->setRoutes($key, $route, $controller);
+                            }
+                            unset($arg['routes'][$key]);
                         }
-                        unset($arg['routes'][$key]);
                     }
-                }
 
-                // Check for static routes that are not assigned to a method,
-                // and auto-assign them to get,post for a fallback
-                if (count($arg['routes']) > 0) {
-                    foreach ($arg['routes'] as $route => $controller) {
-                        $this->setRoutes('get,post', $route, $controller);
+                    // Check for direct route method matches
+                    $routeKeys = array_keys($this->routes);
+                    foreach ($routeKeys as $key) {
+                        if (isset($arg['routes'][$key])) {
+                            foreach ($arg['routes'][$key] as $route => $controller) {
+                                $this->setRoute($key, $route, $controller);
+                            }
+                            unset($arg['routes'][$key]);
+                        }
                     }
-                }
 
-                unset($args[$i]['routes']);
+                    // Check for static routes that are not assigned to a method,
+                    // and auto-assign them to get,post for a fallback
+                    if (count($arg['routes']) > 0) {
+                        foreach ($arg['routes'] as $route => $controller) {
+                            $this->setRoutes('get,post', $route, $controller);
+                        }
+                    }
+
+                    unset($args[$i]['routes']);
+                }
             }
         }
 
@@ -261,6 +274,20 @@ class Pop extends Application
     public function addCustomMethod(string $customMethod): Pop
     {
         $this->routes[strtolower($customMethod)] = [];
+        return $this;
+    }
+
+    /**
+     * Add custom methods
+     *
+     * @param  array $customMethods
+     * @return Pop
+     */
+    public function addCustomMethods(array $customMethods): Pop
+    {
+        foreach ($customMethods as $customMethod) {
+            $this->addCustomMethod($customMethod);
+        }
         return $this;
     }
 
