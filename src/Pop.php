@@ -87,7 +87,7 @@ class Pop extends Application
                             }
                             unset($arg['routes'][$key]);
                         // Handle route prefixes
-                        } else if (str_starts_with($key, '/')) {
+                        } else if (str_starts_with($key, '/') && is_array($value)) {
                             foreach ($value as $methods => $methodRoutes) {
                                 foreach ($methodRoutes as $route => $controller) {
                                     $this->setRoutes($methods, $key . $route, $controller);
