@@ -74,14 +74,24 @@ class Pop extends Application
                 if (isset($arg['routes'])) {
                     // Check for combined route matches
                     foreach ($arg['routes'] as $key => $value) {
+                        // Handle route wildcard
                         if ($key == '*') {
                             foreach ($arg['routes'][$key] as $route => $controller) {
                                 $this->addToAll($route, $controller);
                             }
                             unset($arg['routes'][$key]);
+                        // Handle multiple route methods
                         } else if (str_contains((string)$key, ',')) {
                             foreach ($arg['routes'][$key] as $route => $controller) {
                                 $this->setRoutes($key, $route, $controller);
+                            }
+                            unset($arg['routes'][$key]);
+                        // Handle route prefixes
+                        } else if (str_starts_with($key, '/')) {
+                            foreach ($value as $methods => $methodRoutes) {
+                                foreach ($methodRoutes as $route => $controller) {
+                                    $this->setRoutes($methods, $key . $route, $controller);
+                                }
                             }
                             unset($arg['routes'][$key]);
                         }
