@@ -18,7 +18,7 @@ Popcorn PHP Micro Framework
 RELEASE INFORMATION
 -------------------
 
-Popcorn PHP REST-Based Micro Framework 4.0.0  
+Popcorn PHP REST-Based Micro Framework 4.1.1  
 Released October 16, 2023 
 
 Overview
@@ -42,7 +42,7 @@ Install `popcorn` using Composer.
 Or, require it in your composer.json file
 
     "require": {
-        "popphp/popcorn" : "^4.0.0"
+        "popphp/popcorn" : "^4.1.1"
     }
 
 [Top](#popcorn-php-micro-framework)

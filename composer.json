@@ -17,8 +17,9 @@
     ],
     "require": {
         "php": ">=8.1.0",
-        "popphp/popphp": "^4.2.0",
-        "popphp/pop-http": "^5.0.2",
+        "popphp/popphp": "^4.2.9",
+        "popphp/pop-cookie": "^4.0.1",
+        "popphp/pop-http": "^5.1.0",
         "popphp/pop-session": "^4.0.0",
         "popphp/pop-view": "^4.0.0"
     },
@@ -44,7 +45,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0.x-dev"
+            "dev-master": "4.1.x-dev"
         }
     }
 }
