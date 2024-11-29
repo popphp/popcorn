@@ -1,11 +1,11 @@
 <?php
 /**
- * Popcorn Micro-Framework (http://popcorn.popphp.org/)
+ * Popcorn Micro-Framework (https://www.popphp.org/)
  *
  * @link       https://github.com/popphp/popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2024 NOLA Interactive, LLC. (http://www.nolainteractive.com)
- * @license    http://popcorn.popphp.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2025 NOLA Interactive, LLC.
+ * @license    https://www.popphp.org/license     New BSD License
  */
 
 /**
@@ -19,8 +19,8 @@ namespace Popcorn;
  * @category   Popcorn
  * @package    Popcorn
  * @author     Nick Sagona, III <dev@nolainteractive.com>
- * @copyright  Copyright (c) 2009-2024 NOLA Interactive, LLC. (http://www.nolainteractive.com)
- * @license    http://popcorn.popphp.org/license     New BSD License
- * @version    4.0.0
+ * @copyright  Copyright (c) 2009-2025 NOLA Interactive, LLC.
+ * @license    https://www.popphp.org/license     New BSD License
+ * @version    4.1.0
  */
 class Exception extends \Exception {}
