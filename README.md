@@ -41,7 +41,7 @@ Install `popcorn` using Composer.
 Or, require it in your composer.json file
 
     "require": {
-        "popphp/popcorn" : "^4.1.2"
+        "popphp/popcorn" : "^4.1.3"
     }
 
 [Top](#popcorn-php-micro-framework)
