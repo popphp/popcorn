@@ -4,7 +4,7 @@
  *
  * @link       https://github.com/popphp/popcorn
  * @author     Nick Sagona, III <dev@noladev.com>
- * @copyright  Copyright (c) 2009-2025 NOLA Interactive, LLC.
+ * @copyright  Copyright (c) 2009-2026 NOLA Interactive, LLC.
  * @license    https://www.popphp.org/license     New BSD License
  */
 
@@ -19,8 +19,8 @@ namespace Popcorn;
  * @category   Popcorn
  * @package    Popcorn
  * @author     Nick Sagona, III <dev@noladev.com>
- * @copyright  Copyright (c) 2009-2025 NOLA Interactive, LLC.
+ * @copyright  Copyright (c) 2009-2026 NOLA Interactive, LLC.
  * @license    https://www.popphp.org/license     New BSD License
- * @version    4.1.3
+ * @version    4.1.4
  */
 class Exception extends \Exception {}
