@@ -1,10 +1,13 @@
 Popcorn PHP Micro Framework
 ===========================
 
-<img src="http://www.popphp.org/assets/img/popcorn-logo-shadow.png" width="180" height="180" />
+END OF LIFE
+-----------
+The `popcorn` component v4.1.3 is now end-of-life and will no longer be maintained.
+Its features have be merged into the main `Pop\Application` class of the core [popphp](https://github.com/popphp/popphp)
+v5 repository. Please migrate any Popcorn-based functionality to there.
 
 [![Build Status](https://github.com/popphp/popcorn/workflows/phpunit/badge.svg)](https://github.com/popphp/popcorn/actions)
-[![Coverage Status](http://cc.popphp.org/coverage.php?comp=popcorn)](http://cc.popphp.org/popcorn/)
 
 [![Join the chat at https://discord.gg/TZjgT74U7E](https://media.popphp.org/img/discord.svg)](https://discord.gg/TZjgT74U7E)
 
@@ -17,15 +20,15 @@ Popcorn PHP Micro Framework
 RELEASE INFORMATION
 -------------------
 
-Popcorn PHP REST-Based Micro Framework 4.1.2  
-Released December 2, 2024
+Popcorn PHP REST-Based Micro Framework 4.1.5  
+Released August, 16 2026
 
 Overview
 --------
 
 Popcorn PHP Micro Framework is a REST-based micro framework. It is a small component
 that acts as a layer for [Pop PHP](https://github.com/popphp/popphp) to enforce the REST-based routing rules of a
-web application. It supports PHP 8.2+.
+web application. It supports PHP 8.3+.
 
 `popcorn` is a component of [Pop PHP Framework](http://www.popphp.org/).
 
@@ -41,7 +44,7 @@ Install `popcorn` using Composer.
 Or, require it in your composer.json file
 
     "require": {
-        "popphp/popcorn" : "^4.1.4"
+        "popphp/popcorn" : "^4.1.5"
     }
 
 [Top](#popcorn-php-micro-framework)
