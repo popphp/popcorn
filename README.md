@@ -3,7 +3,7 @@ Popcorn PHP Micro Framework
 
 END OF LIFE
 -----------
-The `popcorn` component v4.1.3 is now end-of-life and will no longer be maintained.
+The `popcorn` component v4.1.5 is now end-of-life and will no longer be maintained.
 Its features have be merged into the main `Pop\Application` class of the core [popphp](https://github.com/popphp/popphp)
 v5 repository. Please migrate any Popcorn-based functionality to there.
 
